@@ -1,0 +1,167 @@
+header {
+  background-color: #1a1a1b;
+  height: 48px;
+}
+
+.reddit-logo {
+  padding: 8px 8px 8px 0;
+}
+
+.brand-text {
+  margin: 0;
+  align-items: center;
+  color: #d7dadc;
+  font-weight: normal;
+  font-size: x-large;
+}
+
+.row {
+  padding: 0 20px;
+  display: flex;
+  height: 48px;
+}
+
+.col-7 {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  flex: 4;
+}
+
+.search-container {
+  max-width: 680px;
+  height: 90%;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.search-container form {
+  margin: 0 0.8em;
+  width: 100%;
+  display: flex;
+}
+.search-container form input {
+  background-color: #272729;
+  color: #d7dadc;
+  padding: 0.7em 0 0.7em 2.8em;
+  border: 1px solid #272729;
+  border-radius: 4px;
+  width: 100%;
+}
+.search-container form input:hover {
+  background-color: #030303;
+  border: 1px solid #d7dadc;
+}
+.search-container form input:focus {
+  background-color: #030303;
+  border: 1px solid #d7dadc;
+  outline: none;
+}
+
+.search-svg {
+  position: absolute;
+  padding: 0.4em 0 0 0.7em;
+}
+
+.col-3 {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+.btn-dark {
+  padding: 7px 2px;
+  margin-right: 8px;
+  width: 120px;
+  height: 31px;
+  border-radius: 3px;
+  font-family: monospace;
+  font-weight: bolder;
+  background-color: #1a1a1b;
+  color: #d7dadc;
+  border: 1px solid #d7dadc;
+}
+.btn-light {
+  padding: 7px 2px;
+  margin-left: 8px;
+  width: 120px;
+  height: 31px;
+  border-radius: 3px;
+  font-family: monospace;
+  font-weight: bolder;
+  border: 1px solid #d7dadc;
+}
+
+.dropdown {
+  border: 1px solid #1a1a1b;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  margin: 0.1em 0 0 0.2em;
+  height: 28px;
+  width: 68px;
+}
+.dropdown:hover {
+  border: 1px solid #4d4e50;
+}
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+.dropdown svg {
+  flex: 1;
+}
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #272729;
+  top: 36px;
+  right: 2px;
+  width: 180px;
+}
+.dropdown-menu h3 {
+  color: #a0a2a3;
+  font-size: 12px;
+  font-family: monospace;
+  margin: 12px 8px 0 8px;
+}
+.dropdown-menu button {
+  width: 100%;
+  padding: 0.4em 0;
+}
+
+@media only screen and (max-width: 1152px) {
+  .btn-dark {
+    margin-right: 2px;
+    width: 80px;
+    height: 31px;
+  }
+  .btn-light {
+    margin-left: 2px;
+    width: 80px;
+    height: 31px;
+  }
+  .dropdown {
+    width: 58px;
+  }
+}
+@media only screen and (max-width: 1048px) {
+  .brand-text {
+    display: none;
+  }
+  .search-container form {
+    margin: 0 0.4em;
+  }
+}
+@media only screen and (max-width: 620px) {
+  .btn-dark,
+  .btn-light {
+    display: none;
+  }
+  .col-7 {
+    flex: 5;
+  }
+  .dropdown {
+    margin: 0 0 0 auto;
+  }
+}
