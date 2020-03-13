@@ -1,0 +1,67 @@
+.row-view {
+  display: flex;
+  padding: 0;
+  height: 222px;
+}
+
+.col-view {
+  flex: 1;
+  height: 100%;
+}
+
+.banner-background {
+  height: 100%;
+}
+
+.banner-placeholder {
+  display: flex;
+  /* justify-content: centr; */
+  align-items: flex-end;
+  width: 100%;
+  height: 80%;
+  background: linear-gradient(90deg, #813333, #752a2adc, #832d2de3);
+}
+
+.banner-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  max-width: 984px;
+  margin: 0 auto;
+  padding: 0 16px 0 24px;
+}
+
+.title-view {
+  background-color: #1a1a1b;
+  width: 984px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 0 16px 0;
+}
+.banner-logo {
+  flex: 1;
+  height: 100%;
+}
+.logo-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #38383b, #404244, #313133);
+}
+
+.title-container {
+  flex: 6;
+}
+.title {
+  color: rgb(212, 212, 212);
+  margin: 0;
+}
+.subreddit {
+  color: #818384;
+  font-size: medium;
+  font-weight: lighter;
+  margin: 0;
+}
+.btn-view {
+  flex: 4;
+}
