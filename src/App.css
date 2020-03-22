@@ -1,0 +1,33 @@
+.pointer {
+  cursor: pointer;
+}
+.d-inline {
+  display: inline;
+}
+.d-flex {
+  display: flex;
+}
+.flex-1 {
+  flex: 1;
+}
+.flex-2 {
+  flex: 2;
+}
+.flex-3 {
+  flex: 3;
+}
+.flex-4 {
+  flex: 4;
+}
+.text-white {
+  color: white;
+}
+.text-dark {
+  color: black;
+}
+.text-blue {
+  color: #0079d3;
+}
+.hover-underline:hover {
+  text-decoration: underline;
+}

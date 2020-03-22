@@ -1,0 +1,92 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+header h2 {
+  margin: 10px 0;
+}
+
+.main-background-banner {
+  background-color: #1a1a1b;
+}
+
+.banner-banner {
+  background: linear-gradient(90deg, #813333, #752a2adc, #832d2de3);
+  height: 144px;
+}
+
+.row-banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 984px;
+  margin: 0 auto;
+  padding: 0 16px 0 24px;
+  background-color: #1a1a1b;
+}
+
+.col-banner {
+  align-items: flex-start;
+  display: flex;
+  margin: -12px 0 10px 0;
+}
+
+.logo-placeholder-banner {
+  background-color: #f36409;
+  display: inline-flex;
+  border: 6px solid white;
+  border-radius: 50%;
+  height: 68px;
+  width: 68px;
+}
+
+.mt-x-banner {
+  flex: 1;
+  display: inline-flex;
+  margin: 24px 0 0 0;
+  padding: 0 0 0 12px;
+}
+
+.text-container-banner {
+  box-sizing: border-box;
+  display: inline-block;
+  padding: 0 24px 0 0;
+}
+
+.title-banner {
+  margin: 0;
+  padding: 0 0 4px 0;
+  font-size: 28px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #d7dadc;
+}
+
+.subreddit-banner {
+  margin: 0;
+  font-size: 15px;
+  font-weight: lighter;
+  font-family: Arial, Helvetica, sans-serif;
+  color: grey;
+}
+
+.btn-container-banner {
+  min-width: 96px;
+  height: fit-content;
+  margin: 4px 0 0 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+.btn-light-banner {
+  font-size: 12px;
+  font-weight: bold;
+  font-family: monospace;
+  padding: 4px 9px 2px;
+  width: 100%;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  background-color: #d7dadc;
+  border-radius: 3px;
+  border: 1px solid #d7dadc;
+}

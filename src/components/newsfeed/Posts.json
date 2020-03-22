@@ -1,0 +1,22 @@
+{
+  "posts2": [
+    {
+      "id": 1,
+      "votes": 79,
+      "postedBy": "eserberus",
+      "postedAt": "2 months ago",
+      "title": "Its 2020! What Ubuntu Moments do you miss and want it back?",
+      "body": "",
+      "comments": ["comment num 1", "comment num 2", "comment num 3"]
+    },
+    {
+      "id": 2,
+      "votes": 31,
+      "postedBy": "nhaines",
+      "postedAt": "1 month ago",
+      "title": "How do you update Ubuntu without a direct Internet connection?",
+      "body": "A reader of my book emailed with this scenario. He doesn't have access to Internet at home, but wants to download updates from another computer situated elsewhere, running Windows. In the past I've done this using Synaptic, but that generates a script that runs on another Linux computer. So, as an exercise in various techniques, what are your preferred methods for keeping an Ubuntu computer with no network access up to date? I'll consider updating the Ubuntu wiki pages with up-to-date methods if there are good responses. To make this generally applicable, please state whether or not your method requires another computer running Ubuntu or Linux, or if it can be performed on a Windows or Mac computer as well. Thanks!",
+      "comments": ["comment num 1"]
+    }
+  ]
+}

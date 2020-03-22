@@ -1,0 +1,64 @@
+.posts-container {
+  display: flex;
+  background-color: rgb(26, 26, 27);
+  border: 1px solid rgb(47, 47, 49);
+  border-radius: 3px;
+  margin: 0.6em 0;
+}
+.posts-container:hover {
+  border: 1px solid #9da0a1;
+}
+
+.col-1-posts {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #161617;
+}
+
+.votes {
+  color: #d2d5d7;
+}
+
+.col-4-posts {
+  flex: 14;
+  background-color: #1a1a1b;
+}
+
+.posted-by {
+  color: #6e7071;
+  font-size: 12px;
+  padding: 0 0 0 0.4em;
+}
+
+.post-title {
+  margin: 0.6em 0;
+  color: #d4d7d9;
+  padding: 0 0 0 0.3em;
+}
+
+.post-img {
+  max-width: 598px;
+  min-width: 491px;
+}
+
+.btn-comments,
+.btn-share,
+.btn-save,
+.btn-options {
+  margin: 0.4em 0.4em 0.4em 0;
+  padding: 0.2em 0.4em;
+  cursor: pointer;
+  background-color: #1a1a1b;
+  border: 1px solid #1a1a1b;
+  color: #6e7071;
+  font-size: smaller;
+  font-weight: 700;
+}
+.btn-comments:hover,
+.btn-share:hover,
+.btn-save:hover,
+.btn-options:hover {
+  background-color: #303131;
+}

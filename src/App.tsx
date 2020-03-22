@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useReducer } from "react";
 import { Header } from "./components/header/Header";
-import { View } from "./components/view/View";
+import { Banner } from "./components/banner/Banner";
+import { Newsfeed } from "./components/newsfeed/Newsfeed";
+import { PostsContext, postReducer } from "./contexts/PostsContext";
+import "./App.css";
 
 function App() {
+  const [posts, dispatch] = useReducer(postReducer, []);
+
   return (
     <>
-      <div>
+      <PostsContext.Provider value={{ posts, dispatch }}>
         <Header />
-        <View />
-      </div>
+        <Banner />
+        <Newsfeed />
+      </PostsContext.Provider>
     </>
   );
 }
