@@ -7,8 +7,11 @@ export const FetchGet = async (dispatch: any) => {
   });
   const r = await res.json();
   console.log(r);
-  const { posts } = r.data;
-  dispatch({ type: "spread", posts: posts });
+  if (r.status === "error") {
+    dispatch({ type: "spread", posts: [] });
+  } else {
+    dispatch({ type: "spread", posts: r.data.posts });
+  }
 };
 
 export const FetchPost = async (dispatch: any, data: any) => {

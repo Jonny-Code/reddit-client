@@ -1,11 +1,11 @@
 import React, { useState, useRef, useContext } from "react";
-import { ReactComponent as RedditLogo } from "./svgs/reddit.svg";
-import { ReactComponent as Account } from "./svgs/account.svg";
-import { ReactComponent as DownArrow } from "./svgs/down-arrow.svg";
-import { ReactComponent as Search } from "./svgs/search.svg";
-import { ReactComponent as Moon } from "./svgs/moon.svg";
-import { ReactComponent as Coin } from "./svgs/coin.svg";
-import { ReactComponent as Close } from "./svgs/x.svg";
+import { ReactComponent as RedditLogo } from "./svg/reddit.svg";
+import { ReactComponent as Account } from "./svg/account.svg";
+import { ReactComponent as DownArrow } from "./svg/down-arrow-1.svg";
+import { ReactComponent as Search } from "./svg/search.svg";
+import { ReactComponent as Moon } from "./svg/moon.svg";
+import { ReactComponent as Coin } from "./svg/coin.svg";
+import { ReactComponent as Close } from "./svg/x.svg";
 import "./Header.css";
 import { FetchAuth } from "../../util/Fetch";
 import { PostsContext } from "../../contexts/PostsContext";

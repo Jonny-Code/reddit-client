@@ -9,12 +9,12 @@
 .col-3-news {
   /* border: 2px solid white; */
   /* height: 100%; */
-  width: 640px;
+  width: 644px;
 }
 
 .nav-container-news {
   background-color: rgb(26, 26, 27);
-  padding: 0 1em;
+  padding: 0 0.7em;
   margin: 0 0 1em 0;
   border: 1px solid rgb(47, 47, 49);
   border-radius: 4px;
@@ -22,7 +22,7 @@
 }
 
 .col-2-news {
-  width: 312px;
+  width: 338px;
 }
 
 .about-container-news {

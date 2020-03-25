@@ -3,6 +3,7 @@ import "./Posts.css";
 import { PostsContext } from "../../contexts/PostsContext";
 import { FetchGet } from "../../util/Fetch";
 import { getTimeCreated } from "../../util/Dates";
+import { ReactComponent as Arrow } from "./svg/arrow.svg";
 
 interface Post {
   _id: string;
@@ -28,7 +29,33 @@ export const Posts: React.FC = () => {
       {posts.map((p: Post) => (
         <div key={p._id} className="posts-container">
           <div className="col-1-posts">
-            <span className="votes">{p.votes}</span>
+            <span
+              className="hover-nav-btn br-2 pointer"
+              style={{
+                height: "20px",
+                width: "70%",
+                padding: "3px 0",
+                margin: "5px auto 4px auto",
+                textAlign: "center"
+              }}
+            >
+              <Arrow />
+            </span>
+            <span className="votes fs-14 font-weight-bold mr-1 ml-1">
+              {p.votes}
+            </span>
+            <span
+              className="hover-nav-btn br-2 pointer"
+              style={{
+                height: "20px",
+                width: "70%",
+                padding: "0 0 7px 0",
+                margin: "4px auto 5px auto",
+                textAlign: "center"
+              }}
+            >
+              <Arrow style={{ transform: "rotate(180deg)" }} />
+            </span>
           </div>
           <div className="col-4-posts">
             <small className="posted-by">
