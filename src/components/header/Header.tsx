@@ -70,8 +70,8 @@ export const Header: React.FC = () => {
             </form>
           </div>
         </div>
-        <div className="col-3-header">
-          <button onClick={openLoginModal} className="btn-dark">
+        <div className="col-3-header ml-5">
+          <button onClick={openLoginModal} className="btn-dark pointer">
             LOG IN
           </button>
           <div ref={logModalRef} className="login-modal">
@@ -117,7 +117,7 @@ export const Header: React.FC = () => {
               </div>
             </div>
           </div>
-          <button onClick={openSignupModal} className="btn-light">
+          <button onClick={openSignupModal} className="btn-light pointer">
             SIGN UP
           </button>
           <div ref={signModalRef} className="signup-modal">
@@ -150,7 +150,10 @@ export const Header: React.FC = () => {
               </div>
             </div>
           </div>
-          <div onClick={() => setIsShowing(!isShowing)} className="dropdown">
+          <div
+            onClick={() => setIsShowing(!isShowing)}
+            className="dropdown pointer"
+          >
             <Account />
             <DownArrow />
           </div>

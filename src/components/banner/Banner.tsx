@@ -14,7 +14,7 @@ export const Banner: React.FC = () => {
               <h2 className="subreddit-banner">r/Ubuntu</h2>
             </div>
             <div className="btn-container-banner">
-              <button className="btn-light-banner">JOIN</button>
+              <button className="btn-light-banner pointer">JOIN</button>
             </div>
           </div>
         </div>

@@ -4,6 +4,7 @@ import { PostsContext } from "../../contexts/PostsContext";
 import { FetchGet } from "../../util/Fetch";
 import { getTimeCreated } from "../../util/Dates";
 import { ReactComponent as Arrow } from "./svg/arrow.svg";
+import { ReactComponent as Comment } from "./svg/comment.svg";
 
 interface Post {
   _id: string;
@@ -65,11 +66,13 @@ export const Posts: React.FC = () => {
             </small>
             <h3 className="post-title">{p.title}</h3>
             {p.imgSrc.length ? (
-              <img className="post-img" src={p.imgSrc} />
+              <div className="d-flex justify-content-center">
+                <img className="post-img" src={p.imgSrc} />
+              </div>
             ) : null}
-            <div className="comments-container">
-              <button className="btn-comments">
-                {p.comments.length} Comments
+            <div className="d-flex">
+              <button className="btn-comments d-flex align-items-center">
+                <Comment className="mr-1" /> {p.comments.length} Comments
               </button>
               <button className="btn-share">Share</button>
               <button className="btn-save">Save</button>
