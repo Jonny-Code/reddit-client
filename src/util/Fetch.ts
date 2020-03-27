@@ -28,25 +28,30 @@ export const FetchPost = async (dispatch: any, data: any) => {
 };
 
 export const FetchAuth = async (data: any) => {
-  const res = await fetch("http://localhost:5000/users/authenticate", {
+  if (!data.email.length || !data.password.length) return;
+  try {
+    const res = await fetch("http://localhost:5000/users/authenticate", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify(data)
   });
-  const r = await res.json();
-  const { _id, name, email } = r.data.user;
-  localStorage.clear();
-  localStorage.setItem("userId", _id);
-  localStorage.setItem("userName", name);
-  localStorage.setItem("userEmail", email);
-  localStorage.setItem("userToken", r.data.token);
-  console.log(r, localStorage);
+    const r = await res.json();
+    console.log(r)
+    const { _id, name, email } = r.data.user;
+    localStorage.clear();
+    localStorage.setItem("userId", _id);
+    localStorage.setItem("userName", name);
+    localStorage.setItem("userEmail", email);
+    localStorage.setItem("userToken", r.data.token);
+    console.log(r, localStorage);
+  } catch (err) {
+    console.error(err)
+  }
 };
 
 export const FetchPut = async (dispatch: any, data: any) => {
-  console.log(data);
   const res = await fetch("http://localhost:5000/posts", {
     method: "PUT",
     headers: {

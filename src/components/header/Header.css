@@ -1,6 +1,8 @@
 .header {
   background-color: #1a1a1b;
   height: 48px;
+  width: 100%;
+  position: fixed;
 }
 
 .reddit-logo {

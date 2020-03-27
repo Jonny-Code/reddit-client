@@ -46,7 +46,7 @@
   background-color: rgb(26, 26, 27);
 }
 
-/* Hovers */
+/* Hover */
 .hover-underline:hover {
   text-decoration: underline;
 }
@@ -61,6 +61,11 @@
 }
 .hover-nav-btn:hover .text-light {
   color: #eeeff0;
+}
+
+/* Focus */
+.focus-outline-none:focus {
+  outline: none;
 }
 
 /* Border-Radius */
@@ -114,6 +119,12 @@
 }
 .fs-15 {
   font-size: 15px;
+}
+.fs-16 {
+  font-size: 16px;
+}
+.fs-17 {
+  font-size: 17px;
 }
 
 /* Width */

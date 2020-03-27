@@ -2,7 +2,6 @@ import React, { useEffect, useContext } from "react";
 import "./Posts.css";
 import { PostsContext } from "../../contexts/PostsContext";
 import { FetchGet } from "../../util/Fetch";
-import { getTimeCreated } from "../../util/Dates";
 import { ReactComponent as Arrow } from "./svg/arrow.svg";
 import { ReactComponent as Comment } from "./svg/comment.svg";
 
@@ -21,9 +20,8 @@ export const Posts: React.FC = () => {
   const { posts, dispatch } = useContext(PostsContext);
 
   useEffect(() => {
-    FetchGet(dispatch);
-    console.log(getTimeCreated());
-  }, []);
+    if (!posts.length) FetchGet(dispatch);
+  }, [dispatch, posts]);
 
   return (
     <>
@@ -67,7 +65,7 @@ export const Posts: React.FC = () => {
             <h3 className="post-title">{p.title}</h3>
             {p.imgSrc.length ? (
               <div className="d-flex justify-content-center">
-                <img className="post-img" src={p.imgSrc} />
+                <img className="post-img" src={p.imgSrc} alt="post" />
               </div>
             ) : null}
             <div className="d-flex">

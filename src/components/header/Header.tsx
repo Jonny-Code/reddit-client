@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef } from "react";
 import { ReactComponent as RedditLogo } from "./svg/reddit.svg";
 import { ReactComponent as Account } from "./svg/account.svg";
 import { ReactComponent as DownArrow } from "./svg/down-arrow-1.svg";
@@ -8,10 +8,8 @@ import { ReactComponent as Coin } from "./svg/coin.svg";
 import { ReactComponent as Close } from "./svg/x.svg";
 import "./Header.css";
 import { FetchAuth } from "../../util/Fetch";
-import { PostsContext } from "../../contexts/PostsContext";
 
 export const Header: React.FC = () => {
-  const { posts, dispatch } = useContext(PostsContext);
   const [isShowing, setIsShowing] = useState<boolean>(false);
   const [user, setUser] = useState<object>({ email: "", password: "" });
   const signModalRef = useRef<HTMLDivElement>(null);
@@ -71,7 +69,7 @@ export const Header: React.FC = () => {
           </div>
         </div>
         <div className="col-3-header ml-5">
-          <button onClick={openLoginModal} className="btn-dark pointer">
+          <button onClick={openLoginModal} className="btn-dark pointer focus-outline-none">
             LOG IN
           </button>
           <div ref={logModalRef} className="login-modal">
@@ -117,7 +115,7 @@ export const Header: React.FC = () => {
               </div>
             </div>
           </div>
-          <button onClick={openSignupModal} className="btn-light pointer">
+          <button onClick={openSignupModal} className="btn-light pointer focus-outline-none">
             SIGN UP
           </button>
           <div ref={signModalRef} className="signup-modal">
