@@ -9,6 +9,8 @@ header h2 {
 
 .main-background-banner {
   background-color: #1a1a1b;
+  padding-top: 48px;
+  /* margin: 48px 0 0 0; */
 }
 
 .banner-banner {
