@@ -1,20 +1,23 @@
 import React, { useReducer } from "react";
-import { Header } from "./components/header/Header";
-import { Banner } from "./components/banner/Banner";
-import { Newsfeed } from "./components/newsfeed/Newsfeed";
+import { View } from "./components/view/View";
 import { PostsContext, postReducer } from "./contexts/PostsContext";
+import {
+  SubredditsContext,
+  subredditReducer
+} from "./contexts/SubredditsContext";
 import "./App.css";
 
 function App() {
-  const [posts, dispatch] = useReducer(postReducer, []);
+  const [posts, postsDispatch] = useReducer(postReducer, []);
+  const [subreddits, subredditsDispatch] = useReducer(subredditReducer, []);
 
   return (
     <>
-      <PostsContext.Provider value={{ posts, dispatch }}>
-        <Header />
-        <Banner />
-        <Newsfeed />
-      </PostsContext.Provider>
+      <SubredditsContext.Provider value={{ subreddits, subredditsDispatch }}>
+        <PostsContext.Provider value={{ posts, postsDispatch }}>
+          <View />
+        </PostsContext.Provider>
+      </SubredditsContext.Provider>
     </>
   );
 }

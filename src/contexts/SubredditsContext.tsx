@@ -1,18 +1,18 @@
 import { createContext } from "react";
-export const PostsContext = createContext<any>(null);
+export const SubredditsContext = createContext<any>(null);
 
-export function postReducer(state: any, payload: any) {
+export function subredditReducer(state: any, payload: any) {
   switch (payload.type) {
     case "add":
-      return [...state, payload.posts];
+      return [...state, payload.subreddits];
     case "spread":
-      return [...payload.posts];
+      return [...payload.subreddits];
     case "remove":
       return state.filter((i: any) => i._id !== payload._id);
     case "update":
       for (let i = 0; i < state.length; i++) {
-        if (state[i]._id === payload.posts._id) {
-          state[i] = payload.posts;
+        if (state[i]._id === payload.subreddits._id) {
+          state[i] = payload.subreddits;
         }
       }
       return [...state];

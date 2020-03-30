@@ -1,9 +1,8 @@
-import React, { useEffect, useContext } from "react";
-import "./Posts.css";
+import React, { useContext } from "react";
 import { PostsContext } from "../../contexts/PostsContext";
-import { FetchGet } from "../../util/Fetch";
 import { ReactComponent as Arrow } from "./svg/arrow.svg";
 import { ReactComponent as Comment } from "./svg/comment.svg";
+import "./Posts.css";
 
 interface Post {
   _id: string;
@@ -17,11 +16,7 @@ interface Post {
 }
 
 export const Posts: React.FC = () => {
-  const { posts, dispatch } = useContext(PostsContext);
-
-  useEffect(() => {
-    if (!posts.length) FetchGet(dispatch);
-  }, [dispatch, posts]);
+  const { posts } = useContext(PostsContext);
 
   return (
     <>
