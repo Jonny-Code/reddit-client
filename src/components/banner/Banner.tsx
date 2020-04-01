@@ -1,21 +1,37 @@
 import React, { useEffect, useContext, useState } from "react";
+import { useParams } from "react-router-dom";
 import { SubredditsContext } from "../../contexts/SubredditsContext";
+import { FetchGetSubreddits } from "../../util/Fetch";
+import { PostsContext } from "../../contexts/PostsContext";
 import "./Banner.css";
 
+
+
+
 export const Banner: React.FC = () => {
-  const { subreddits } = useContext(SubredditsContext);
+  const { subreddits, subredditsDispatch } = useContext(SubredditsContext);
+  const { postsDispatch } = useContext(PostsContext);
   const [sub, setSub] = useState({
     _id: "",
     name: "",
     heading: "",
     joined: false
   });
+  let { subName } = useParams();
+
+  
 
   useEffect(() => {
+    console.log(subName)
+    if (!subreddits.length) {
+      console.log("run fetch")
+      FetchGetSubreddits(subredditsDispatch, postsDispatch, subName);
+    }
+
     if (subreddits.length) {
       setSub(subreddits[0]);
     }
-  }, [subreddits]);
+  }, [subName, subreddits, subredditsDispatch, postsDispatch]);
 
   return (
     <div className="main-background-banner">

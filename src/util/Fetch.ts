@@ -1,12 +1,6 @@
 export const FetchGetPosts = async (postsDispatch: any) => {
-  const t = localStorage.getItem("userToken") || "";
-
   try {
-    const res = await fetch("http://localhost:5000/posts", {
-      headers: {
-        "x-access-token": t
-      }
-    });
+    const res = await fetch("http://localhost:5000/posts");
     const r = await res.json();
     console.log(r);
     if (r.status === "error") {
@@ -19,17 +13,9 @@ export const FetchGetPosts = async (postsDispatch: any) => {
   }
 };
 
-export const FetchGetSubreddits = async (
-  subredditsDispatch: any,
-  postsDispatch: any
-) => {
-  const t = localStorage.getItem("userToken") || "";
+export const FetchGetSubreddits = async (subredditsDispatch: any, postsDispatch: any, subredditName: any) => {
   try {
-    const res = await fetch("http://localhost:5000/subreddits", {
-      headers: {
-        "x-access-token": t
-      }
-    });
+    const res = await fetch("http://localhost:5000/subreddits/" + subredditName);
     const r = await res.json();
     console.log(r);
     if (r.status === "error") {
