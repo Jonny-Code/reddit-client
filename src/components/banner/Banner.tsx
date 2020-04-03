@@ -5,40 +5,49 @@ import { FetchGetSubreddits } from "../../util/Fetch";
 import { PostsContext } from "../../contexts/PostsContext";
 import "./Banner.css";
 
-
-
-
 export const Banner: React.FC = () => {
   const { subreddits, subredditsDispatch } = useContext(SubredditsContext);
   const { postsDispatch } = useContext(PostsContext);
   const [sub, setSub] = useState({
+    posts: null,
     _id: "",
     name: "",
     heading: "",
+    title: "",
+    bannerImgSrc: "",
+    logoImgSrc: "",
     joined: false
   });
   let { subName } = useParams();
 
-  
-
   useEffect(() => {
-    console.log(subName)
     if (!subreddits.length) {
-      console.log("run fetch")
       FetchGetSubreddits(subredditsDispatch, postsDispatch, subName);
     }
 
     if (subreddits.length) {
-      setSub(subreddits[0]);
+      setSub(subreddits.find((i: any) => i.name === subName));
     }
   }, [subName, subreddits, subredditsDispatch, postsDispatch]);
 
   return (
     <div className="main-background-banner">
-      <div className="banner-banner"></div>
+      <div
+        style={{
+          backgroundImage: "url(" + sub.bannerImgSrc + ")",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          height: "144px"
+        }}
+      ></div>
       <div className="row-banner">
         <div className="col-banner">
-          <div className="logo-placeholder-banner"></div>
+          <img
+            src={sub.logoImgSrc}
+            className="logo-placeholder-banner"
+            alt="ubuntu"
+          />
           <div className="mt-x-banner">
             <div className="text-container-banner">
               <h1 className="title-banner">{sub.heading}</h1>

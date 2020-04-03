@@ -6,8 +6,8 @@ import { ReactComponent as Search } from "./svg/search.svg";
 import { ReactComponent as Moon } from "./svg/moon.svg";
 import { ReactComponent as Coin } from "./svg/coin.svg";
 import { ReactComponent as Close } from "./svg/x.svg";
-import "./Header.css";
 import { FetchAuth } from "../../util/Fetch";
+import "./Header.css";
 
 export const Header: React.FC = () => {
   const [isShowing, setIsShowing] = useState<boolean>(false);
@@ -69,7 +69,10 @@ export const Header: React.FC = () => {
           </div>
         </div>
         <div className="col-3-header ml-5">
-          <button onClick={openLoginModal} className="btn-dark pointer focus-outline-none">
+          <button
+            onClick={openLoginModal}
+            className="btn-dark pointer focus-outline-none"
+          >
             LOG IN
           </button>
           <div ref={logModalRef} className="login-modal">
@@ -83,7 +86,6 @@ export const Header: React.FC = () => {
                   <RedditLogo />
                   <h4>Sign in</h4>
                   <input
-                    // autoComplete="off"
                     onChange={updateField}
                     name="email"
                     type="text"
@@ -115,7 +117,10 @@ export const Header: React.FC = () => {
               </div>
             </div>
           </div>
-          <button onClick={openSignupModal} className="btn-light pointer focus-outline-none">
+          <button
+            onClick={openSignupModal}
+            className="btn-light pointer focus-outline-none"
+          >
             SIGN UP
           </button>
           <div ref={signModalRef} className="signup-modal">
