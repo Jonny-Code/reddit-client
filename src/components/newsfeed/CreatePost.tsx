@@ -42,6 +42,7 @@ export const CreatePost: React.FC = () => {
     if (count.current === Object.values(post).length - 2) {
       console.log("ready to send", post);
       FetchPost(postsDispatch, post);
+      return;
     }
     count.current++;
     console.log(count.current);

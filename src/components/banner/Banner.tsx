@@ -1,12 +1,12 @@
 import React, { useEffect, useContext, useState } from "react";
 import { useParams } from "react-router-dom";
-import { SubredditsContext } from "../../contexts/SubredditsContext";
-import { FetchGetSubreddits } from "../../util/Fetch";
+import { subredditContext } from "../../contexts/SubredditContext";
+import { FetchGetsubreddit } from "../../util/Fetch";
 import { PostsContext } from "../../contexts/PostsContext";
 import "./Banner.css";
 
 export const Banner: React.FC = () => {
-  const { subreddits, subredditsDispatch } = useContext(SubredditsContext);
+  const { subreddit, subredditDispatch } = useContext(subredditContext);
   const { postsDispatch } = useContext(PostsContext);
   const [sub, setSub] = useState({
     posts: null,
@@ -21,14 +21,26 @@ export const Banner: React.FC = () => {
   let { subName } = useParams();
 
   useEffect(() => {
-    if (!subreddits.length) {
-      FetchGetSubreddits(subredditsDispatch, postsDispatch, subName);
-    }
+    console.log(subreddit);
+    setSub(subreddit);
+  }, [subreddit]);
 
-    if (subreddits.length) {
-      setSub(subreddits.find((i: any) => i.name === subName));
-    }
-  }, [subName, subreddits, subredditsDispatch, postsDispatch]);
+  useEffect(
+    () => {
+      console.log(subreddit);
+      FetchGetsubreddit(subredditDispatch, postsDispatch, subName);
+      console.log(subreddit);
+      // if (subreddit) {
+      //   FetchGetsubreddit(subredditDispatch, postsDispatch, subName);
+      // }
+
+      // if (subreddit.length) {
+      //   setSub(subreddit.find((i: any) => i.name === subName));
+      // }
+    },
+    //  [subName, subreddit, subredditDispatch, postsDispatch]
+    []
+  );
 
   return (
     <div className="main-background-banner">

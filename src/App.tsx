@@ -2,22 +2,22 @@ import React, { useReducer } from "react";
 import { View } from "./components/view/View";
 import { PostsContext, postReducer } from "./contexts/PostsContext";
 import {
-  SubredditsContext,
+  subredditContext,
   subredditReducer
-} from "./contexts/SubredditsContext";
+} from "./contexts/SubredditContext";
 import "./App.css";
 
 function App() {
   const [posts, postsDispatch] = useReducer(postReducer, []);
-  const [subreddits, subredditsDispatch] = useReducer(subredditReducer, []);
+  const [subreddit, subredditDispatch] = useReducer(subredditReducer, []);
 
   return (
     <>
-      <SubredditsContext.Provider value={{ subreddits, subredditsDispatch }}>
+      <subredditContext.Provider value={{ subreddit, subredditDispatch }}>
         <PostsContext.Provider value={{ posts, postsDispatch }}>
           <View />
         </PostsContext.Provider>
-      </SubredditsContext.Provider>
+      </subredditContext.Provider>
     </>
   );
 }

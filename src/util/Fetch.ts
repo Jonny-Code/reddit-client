@@ -13,15 +13,19 @@ export const FetchGetPosts = async (postsDispatch: any) => {
   }
 };
 
-export const FetchGetSubreddits = async (subredditsDispatch: any, postsDispatch: any, subredditName: any) => {
+export const FetchGetsubreddit = async (
+  subredditDispatch: any,
+  postsDispatch: any,
+  subredditName: any
+) => {
   try {
-    const res = await fetch("http://localhost:5000/subreddits/" + subredditName);
+    const res = await fetch("http://localhost:5000/subreddit/" + subredditName);
     const r = await res.json();
     console.log(r);
     if (r.status === "error") {
-      postsDispatch({ type: "spread", subreddits: [] });
+      postsDispatch({ type: "spread", subreddit: [] });
     } else {
-      subredditsDispatch({ type: "spread", subreddits: r.data.subreddits });
+      subredditDispatch({ type: "spread", subreddit: r.data.subreddit });
       postsDispatch({ type: "spread", posts: r.data.posts });
     }
   } catch (err) {
