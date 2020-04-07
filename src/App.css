@@ -1,6 +1,9 @@
 .pointer {
   cursor: pointer;
 }
+.o-hidden {
+  overflow: hidden;
+}
 .d-inline {
   display: inline;
 }

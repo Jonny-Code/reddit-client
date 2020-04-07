@@ -5,7 +5,6 @@ import { Header } from "../header/Header";
 import { Newsfeed } from "../newsfeed/Newsfeed";
 
 export const View: React.FC = () => {
-
   return (
     <>
       <Router>

@@ -1,16 +1,17 @@
 import React from "react";
-import "./Newsfeed.css";
+import { Route } from "react-router-dom";
 import { Posts } from "../posts/Posts";
 import { Navbar } from "../navbar/Navbar";
 import { About } from "../about/About";
-import { CreatePost } from "./CreatePost";
+import { PostComments } from "../post-comments/PostComments";
+import "./Newsfeed.css";
 
 export const Newsfeed: React.FC = () => {
   return (
     <>
       <div className="container-news">
+        <Route path="/r/:subName/comments/:postId" component={PostComments} />
         <div className="col-3-news">
-          <CreatePost />
           <Navbar />
           <Posts />
         </div>

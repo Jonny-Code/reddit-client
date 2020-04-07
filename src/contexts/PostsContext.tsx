@@ -1,5 +1,6 @@
 import { createContext } from "react";
-export const PostsContext = createContext<any>(null);
+import { PContext } from "../components/posts/Post";
+export const PostsContext = createContext({} as PContext);
 
 export function postReducer(state: any, payload: any) {
   switch (payload.type) {

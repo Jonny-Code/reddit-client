@@ -1,30 +1,10 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import { FetchPost } from "../../util/Fetch";
 import { PostsContext } from "../../contexts/PostsContext";
-
-interface Post {
-  _id?: string;
-  name: string;
-  votes: number;
-  postedBy: string;
-  postedAt: string;
-  title: string;
-  imgSrc: string;
-  body: string;
-  comments: number;
-}
+import { PostModel } from "../posts/Post";
 
 export const CreatePost: React.FC = () => {
-  const [post, setPost] = useState({
-    name: "",
-    votes: 0,
-    postedBy: "",
-    postedAt: "",
-    title: "",
-    imgSrc: "",
-    body: "",
-    comments: 0
-  });
+  const [post, setPost] = useState(PostModel);
   let count = useRef(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
