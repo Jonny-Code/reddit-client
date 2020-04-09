@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { PostsContext } from "../../contexts/PostsContext";
 import { ReactComponent as Arrow } from "./svg/arrow.svg";
 import { ReactComponent as Comment } from "./svg/comment.svg";
-import { Post, PostModel } from "./Post";
+import { Post, PostModel } from "../../contexts/Post";
 import "./Posts.css";
 
 export const Posts: React.FC = () => {

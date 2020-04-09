@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import { FetchPost } from "../../util/Fetch";
 import { PostsContext } from "../../contexts/PostsContext";
-import { PostModel } from "../posts/Post";
+import { PostModel } from "../../contexts/Post";
 
 export const CreatePost: React.FC = () => {
   const [post, setPost] = useState(PostModel);

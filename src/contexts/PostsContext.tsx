@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { PContext } from "../components/posts/Post";
+import { PContext } from "./Post";
 export const PostsContext = createContext({} as PContext);
 
 export function postReducer(state: any, payload: any) {

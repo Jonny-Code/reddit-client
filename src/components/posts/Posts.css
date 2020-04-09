@@ -50,7 +50,9 @@
 .btn-comments,
 .btn-share,
 .btn-save,
-.btn-options {
+.btn-options,
+.btn-hide,
+.btn-report {
   display: flex;
   flex-direction: row;
   margin: 0.4em;
@@ -65,6 +67,8 @@
 .btn-comments:hover,
 .btn-share:hover,
 .btn-save:hover,
-.btn-options:hover {
+.btn-options:hover,
+.btn-hide:hover,
+.btn-report:hover {
   background-color: #303131;
 }

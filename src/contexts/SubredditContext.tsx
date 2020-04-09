@@ -1,17 +1,7 @@
 import { createContext } from "react";
+import { SContext } from "./Subreddit";
 
-interface Subreddit {
-  posts: Array<string>;
-  _id: string;
-  name: string;
-  heading: string;
-  title: string;
-  bannerImgSrc: string;
-  logoImgSrc: string;
-  joined: boolean;
-}
-
-export const subredditContext = createContext<Subreddit | null | any>(null);
+export const subredditContext = createContext({} as SContext);
 
 export function subredditReducer(state: any, payload: any) {
   switch (payload.type) {
