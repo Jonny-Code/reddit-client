@@ -13,7 +13,7 @@ export const FetchGetPosts = async (postsDispatch: any) => {
   }
 };
 
-export const FetchGetsubreddit = async (
+export const FetchGetSubreddit = async (
   subredditDispatch: any,
   postsDispatch: any,
   subredditName: any
@@ -33,13 +33,24 @@ export const FetchGetsubreddit = async (
   }
 };
 
+export const FetchGetComments = async (commentsDispatch: any, postId: any) => {
+  const res = await fetch("http://localhost:5000/comments/" + postId);
+  const r = await res.json();
+  console.log(r);
+  if (r.status === "error") {
+    commentsDispatch({ type: "spread", comments: [] });
+  } else {
+    commentsDispatch({ type: "spread", comments: r.data.comments });
+  }
+};
+
 export const FetchPost = async (postsDispatch: any, data: any) => {
   const res = await fetch("http://localhost:5000/posts", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
   const r = await res.json();
   console.log(r);
@@ -48,15 +59,31 @@ export const FetchPost = async (postsDispatch: any, data: any) => {
     : console.error(r.error);
 };
 
+export const FetchPostComment = async (
+  commentsDispatch: any,
+  data: any,
+  postId: string
+) => {
+  const res = await fetch("http://localhost:5000/comments/" + postId, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  const r = await res.json();
+  console.log(r);
+};
+
 export const FetchAuth = async (data: any) => {
   if (!data.email.length || !data.password.length) return;
   try {
     const res = await fetch("http://localhost:5000/users/authenticate", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
     const r = await res.json();
     console.log(r);
@@ -76,9 +103,9 @@ export const FetchPut = async (postsDispatch: any, data: any) => {
   const res = await fetch("http://localhost:5000/posts", {
     method: "PUT",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
   const r = await res.json();
   console.log(r);
@@ -89,7 +116,7 @@ export const FetchPut = async (postsDispatch: any, data: any) => {
 
 export const FetchDelete = async (postsDispatch: any, id: string) => {
   const res = await fetch(`http://localhost:5000/posts/${id}`, {
-    method: "DELETE"
+    method: "DELETE",
   });
   const r = await res.json();
   r.success

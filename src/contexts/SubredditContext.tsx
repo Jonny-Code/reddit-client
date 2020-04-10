@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { SContext } from "./Subreddit";
 
-export const subredditContext = createContext({} as SContext);
+export const SubredditContext = createContext({} as SContext);
 
 export function subredditReducer(state: any, payload: any) {
   switch (payload.type) {

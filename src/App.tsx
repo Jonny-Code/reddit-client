@@ -2,22 +2,26 @@ import React, { useReducer } from "react";
 import { View } from "./components/view/View";
 import { PostsContext, postReducer } from "./contexts/PostsContext";
 import {
-  subredditContext,
-  subredditReducer
+  SubredditContext,
+  subredditReducer,
 } from "./contexts/SubredditContext";
 import "./App.css";
+import { commentReducer, CommentsContext } from "./contexts/CommentsContext";
 
 function App() {
   const [posts, postsDispatch] = useReducer(postReducer, []);
   const [subreddit, subredditDispatch] = useReducer(subredditReducer, []);
+  const [comments, commentsDispatch] = useReducer(commentReducer, []);
 
   return (
     <>
-      <subredditContext.Provider value={{ subreddit, subredditDispatch }}>
+      <SubredditContext.Provider value={{ subreddit, subredditDispatch }}>
         <PostsContext.Provider value={{ posts, postsDispatch }}>
-          <View />
+          <CommentsContext.Provider value={{ comments, commentsDispatch }}>
+            <View />
+          </CommentsContext.Provider>
         </PostsContext.Provider>
-      </subredditContext.Provider>
+      </SubredditContext.Provider>
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { Dispatch } from "react";
 
 export interface Subreddit {
-  posts: Array<string>;
+  posts: string[];
   _id?: string;
   name: string;
   heading: string;
@@ -24,5 +24,5 @@ export const SubredditModel = {
   title: "",
   bannerImgSrc: "",
   logoImgSrc: "",
-  joined: false
+  joined: false,
 };

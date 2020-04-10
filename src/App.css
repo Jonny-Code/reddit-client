@@ -49,6 +49,13 @@
   background-color: rgb(26, 26, 27);
 }
 
+/* Lines */
+.vertical-line {
+  width: 48%;
+  height: 100%;
+  border-right: 2px solid rgb(79, 79, 85);
+}
+
 /* Hover */
 .hover-underline:hover {
   text-decoration: underline;
@@ -56,6 +63,10 @@
 .hover-nav-btn:hover {
   background-color: rgb(50, 50, 53);
 }
+.hover-vertical-line:hover {
+  border-right: 2px solid rgb(248, 248, 248);
+}
+
 .hover-nav-btn:hover #hover-nav-svg {
   fill: #eeeff0;
 }

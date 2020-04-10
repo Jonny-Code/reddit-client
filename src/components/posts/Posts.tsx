@@ -1,9 +1,9 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { PostsContext } from "../../contexts/PostsContext";
 import { ReactComponent as Arrow } from "./svg/arrow.svg";
 import { ReactComponent as Comment } from "./svg/comment.svg";
-import { Post, PostModel } from "../../contexts/Post";
+import { Post } from "../../contexts/Post";
 import "./Posts.css";
 
 export const Posts: React.FC = () => {
@@ -27,7 +27,7 @@ export const Posts: React.FC = () => {
                   width: "70%",
                   padding: "3px 0",
                   margin: "5px auto 4px auto",
-                  textAlign: "center"
+                  textAlign: "center",
                 }}
               >
                 <Arrow />
@@ -42,7 +42,7 @@ export const Posts: React.FC = () => {
                   width: "70%",
                   padding: "0 0 7px 0",
                   margin: "4px auto 5px auto",
-                  textAlign: "center"
+                  textAlign: "center",
                 }}
               >
                 <Arrow style={{ transform: "rotate(180deg)" }} />
@@ -77,5 +77,3 @@ export const Posts: React.FC = () => {
     </>
   );
 };
-
-const styles = {};

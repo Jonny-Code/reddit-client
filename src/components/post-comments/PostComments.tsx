@@ -1,17 +1,17 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ReactComponent as Arrow } from "./svg/arrow.svg";
-import { ReactComponent as Comment } from "./svg/comment.svg";
+import { ReactComponent as CommentSvg } from "./svg/comment.svg";
 import { Comments } from "./Comments";
 import { PostsContext } from "../../contexts/PostsContext";
 import { Post, PostModel } from "../../contexts/Post";
-import { subredditContext } from "../../contexts/SubredditContext";
+import { SubredditContext } from "../../contexts/SubredditContext";
 import { Subreddit, SubredditModel } from "../../contexts/Subreddit";
 import "./PostComments.css";
 
 export const PostComments: React.FC = () => {
   const { posts } = useContext(PostsContext);
-  const { subreddit } = useContext(subredditContext);
+  const { subreddit } = useContext(SubredditContext);
   const [postContent, setPostContent] = useState<Post>(PostModel);
   const [subredditContent, setSubredditContent] = useState<Subreddit>(
     SubredditModel
@@ -22,7 +22,6 @@ export const PostComments: React.FC = () => {
   useEffect(() => {
     if (!Array.isArray(subreddit)) {
       setSubredditContent(subreddit);
-      console.log(subredditContent);
     }
 
     document.body.style.overflow = "hidden";
@@ -117,7 +116,7 @@ export const PostComments: React.FC = () => {
                       }}
                       className="d-flex justify-content-center align-items-center"
                     >
-                      <Comment />
+                      <CommentSvg />
                     </span>
                     <h4
                       style={{ margin: "0", padding: "0 0 2px 10px" }}
@@ -151,6 +150,8 @@ export const PostComments: React.FC = () => {
               >
                 <div
                   style={{
+                    maxWidth: "740px",
+                    width: "100%",
                     display: "flex",
                     flexDirection: "column",
                   }}
@@ -269,7 +270,7 @@ export const PostComments: React.FC = () => {
                       </h5>
                       <div className="d-flex">
                         <button className="btn-comments d-flex align-items-center">
-                          <Comment className="mr-1" /> {postContent.comments}{" "}
+                          <CommentSvg className="mr-1" /> {postContent.comments}{" "}
                           Comments
                         </button>
                         <button className="btn-share">Share</button>
@@ -304,7 +305,9 @@ export const PostComments: React.FC = () => {
                         >
                           Log in or sign up to leave a comment
                         </h4>
-                        <span style={{ margin: "0 6px 0 auto" }}>
+                        <span
+                          style={{ display: "flex", margin: "0 6px 0 auto" }}
+                        >
                           <button
                             style={{
                               marginRight: "2px",
@@ -317,7 +320,7 @@ export const PostComments: React.FC = () => {
                           </button>
                           <button
                             style={{
-                              marginRight: "2px",
+                              marginLeft: "2px",
                               width: "80px",
                               height: "31px",
                             }}

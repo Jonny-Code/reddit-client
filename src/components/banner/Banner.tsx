@@ -1,26 +1,23 @@
 import React, { useEffect, useContext, useState } from "react";
 import { useParams } from "react-router-dom";
-import { subredditContext } from "../../contexts/SubredditContext";
-import { FetchGetsubreddit } from "../../util/Fetch";
+import { SubredditContext } from "../../contexts/SubredditContext";
+import { FetchGetSubreddit } from "../../util/Fetch";
 import { PostsContext } from "../../contexts/PostsContext";
 import "./Banner.css";
 import { SubredditModel, Subreddit } from "../../contexts/Subreddit";
 
 export const Banner: React.FC = () => {
-  const { subreddit, subredditDispatch } = useContext(subredditContext);
+  const { subreddit, subredditDispatch } = useContext(SubredditContext);
   const { postsDispatch } = useContext(PostsContext);
   const [sub, setSub] = useState<Subreddit>(SubredditModel);
   let { subName } = useParams();
 
   useEffect(() => {
-    console.log(subreddit);
     setSub(subreddit);
   }, [subreddit]);
 
   useEffect(() => {
-    console.log(subreddit);
-    FetchGetsubreddit(subredditDispatch, postsDispatch, subName);
-    console.log(subreddit);
+    FetchGetSubreddit(subredditDispatch, postsDispatch, subName);
   }, []);
 
   return (
@@ -31,7 +28,7 @@ export const Banner: React.FC = () => {
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-          height: "144px"
+          height: "144px",
         }}
       ></div>
       <div className="row-banner">
