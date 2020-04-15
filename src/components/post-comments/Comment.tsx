@@ -101,7 +101,6 @@ export const Comment: React.FC<CommentType> = ({
           >
             {body}
           </h5>
-          {isReply ? <h1>reply</h1> : null}
         </div>
       </div>
     </>

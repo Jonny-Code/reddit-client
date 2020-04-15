@@ -7,6 +7,7 @@ import { PostsContext } from "../../contexts/PostsContext";
 import { Post, PostModel } from "../../contexts/Post";
 import { SubredditContext } from "../../contexts/SubredditContext";
 import { Subreddit, SubredditModel } from "../../contexts/Subreddit";
+import { CreateComment } from "../newsfeed/CreateComment";
 import "./PostComments.css";
 
 export const PostComments: React.FC = () => {
@@ -137,6 +138,7 @@ export const PostComments: React.FC = () => {
                 </div>
               </div>
               <div style={{ width: "100%", height: "48px" }}></div>
+
               <div
                 onClick={(e: any) => {
                   e.preventDefault();
@@ -156,6 +158,7 @@ export const PostComments: React.FC = () => {
                     flexDirection: "column",
                   }}
                 >
+                  <CreateComment />
                   <div
                     style={{
                       maxWidth: "740px",

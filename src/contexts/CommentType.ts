@@ -8,7 +8,7 @@ export interface CommentType {
   postedAt: string;
   body: string;
   isReply: boolean;
-  replies: string[];
+  replies: any[];
 }
 
 export interface CContext {

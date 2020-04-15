@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 import { SubredditContext } from "../../contexts/SubredditContext";
 import { FetchGetSubreddit } from "../../util/Fetch";
 import { PostsContext } from "../../contexts/PostsContext";
-import "./Banner.css";
 import { SubredditModel, Subreddit } from "../../contexts/Subreddit";
+import "./Banner.css";
 
 export const Banner: React.FC = () => {
   const { subreddit, subredditDispatch } = useContext(SubredditContext);
