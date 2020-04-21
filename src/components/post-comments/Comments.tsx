@@ -5,20 +5,16 @@ import { CommentsContext } from "../../contexts/CommentsContext";
 import { ReactComponent as Arrow } from "./svg/arrow.svg";
 
 function Comment({ c }: any) {
-  let x = 100;
-  if (c.replies.length > 0) {
-    x *= 0.75;
-  }
+  const { comments, commentsDispatch } = useContext(CommentsContext);
 
   const nestedComments = (c.replies || []).map((c: any) => {
     return (
       <Comment
         style={{
           display: "flex",
-          height: `${x}%`,
           width: "100%",
           margin: "0",
-          padding: "14px 0 4px 0",
+          padding: "14px 0 0 0",
           background: "#1a1a1b",
         }}
         key={c._id}
@@ -28,98 +24,170 @@ function Comment({ c }: any) {
   });
 
   return (
-    <div
-      key={c._id}
-      style={{
-        display: "flex",
-        height: `${x}%`,
-        width: "100%",
-        margin: "0",
-        padding: "18px 0 0 0",
-        background: "#1a1a1b",
-      }}
-    >
-      <div
-        style={{
-          margin: "0 2px 0 10px",
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <span
-          className="pointer d-flex justify-content-center"
-          style={{
-            height: "18px",
-            width: "28px",
-            margin: "2px 0",
-          }}
-        >
-          <Arrow />
-        </span>
-
-        <span
-          className="pointer d-flex justify-content-center"
-          style={{
-            height: "18px",
-            width: "28px",
-            margin: "2px 0",
-          }}
-        >
-          <Arrow style={{ transform: "rotate(180deg)" }} />
-        </span>
-
+    <>
+      {!c.hideComment ? (
         <div
+          key={c._id}
           style={{
-            margin: "6px 0 0 0",
-            padding: "0 0 3px 0",
-          }}
-          className="vertical-line hover-vertical-line pointer"
-        ></div>
-      </div>
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          padding: "0 0 2px 0",
-        }}
-      >
-        <h5
-          style={{
-            display: "inline",
-            color: "rgb(215, 218, 220)",
-            margin: "4px 0 0 0",
-            fontSize: "13px",
-            fontWeight: 400,
-          }}
-          className="hover-underline pointer"
-        >
-          {c.postedBy}
-        </h5>
-        <h5
-          style={{
-            display: "inline",
-            color: "#818384",
-            margin: "4px 0 0 4px",
-            fontSize: "13px",
-            fontWeight: 300,
+            display: "flex",
+            width: "100%",
+            margin: "0",
+            padding: "18px 0 0 0",
+            background: "#1a1a1b",
           }}
         >
-          {c.points} points · {c.postedAt}
-        </h5>
-        <h5
+          <div
+            style={{
+              flex: 1,
+              margin: "0 0 0 2px",
+              height: "auto",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <span
+              className="pointer d-flex justify-content-center"
+              style={{
+                height: "18px",
+                width: "22px",
+                margin: "2px 0",
+              }}
+            >
+              <Arrow />
+            </span>
+
+            <span
+              className="pointer d-flex justify-content-center"
+              style={{
+                height: "18px",
+                width: "22px",
+                margin: "2px 0",
+              }}
+            >
+              <Arrow style={{ transform: "rotate(180deg)" }} />
+            </span>
+
+            <div
+              onClick={() => {
+                console.log(c);
+                commentsDispatch({ type: "hide", c: c });
+              }}
+              className="vertical-line hover-vertical-line pointer"
+              style={{
+                height: "100%",
+                margin: "6px 0 0 0",
+                padding: "0 0 3px 0",
+              }}
+            ></div>
+          </div>
+
+          <div
+            style={{
+              flex: 32,
+              width: "100%",
+              height: "100%",
+              padding: "0 0 0 4px",
+            }}
+          >
+            <h5
+              className="hover-underline pointer"
+              style={{
+                display: "inline",
+                color: "rgb(215, 218, 220)",
+                margin: "4px 0 0 0",
+                fontSize: "13px",
+                fontWeight: 400,
+              }}
+            >
+              {c.postedBy}
+            </h5>
+            <h5
+              style={{
+                display: "inline",
+                color: "#818384",
+                margin: "4px 0 0 4px",
+                fontSize: "13px",
+                fontWeight: 300,
+              }}
+            >
+              {c.points} points · {c.postedAt}
+            </h5>
+            <h5
+              style={{
+                color: "rgb(215, 218, 220)",
+                margin: "2px 0",
+                lineHeight: "1.4",
+              }}
+              className="fs-15 font-weight-lighter"
+            >
+              {c.body}
+            </h5>
+            {nestedComments}
+          </div>
+        </div>
+      ) : (
+        <div
+          key={c._id}
           style={{
-            color: "rgb(215, 218, 220)",
-            margin: "2px 0",
-            lineHeight: "1.4",
+            display: "flex",
+            width: "100%",
+            margin: "0",
+            padding: "19px 0 0 6px",
+            background: "#1a1a1b",
           }}
-          className="fs-15 font-weight-lighter"
         >
-          {c.body}
-        </h5>
-        {nestedComments}
-      </div>
-    </div>
+          <div
+            onClick={() => {
+              console.log(c);
+              commentsDispatch({ type: "hide", c: c });
+            }}
+            style={{
+              display: "flex",
+              cursor: "pointer",
+              textAlign: "center",
+              justifyContent: "center",
+              alignItems: "center",
+              margin: "3px 1px 0 0",
+              padding: "2px 2px 3px 2px",
+              width: "10px",
+              height: "10px",
+              background: "#4fbcff",
+              color: "black",
+              fontSize: "12px",
+              fontWeight: "bolder",
+              borderRadius: "50%",
+            }}
+          >
+            ＋
+          </div>
+          <h5
+            className="hover-underline pointer"
+            style={{
+              display: "inline",
+              color: "rgba(215, 218, 220)",
+              opacity: ".6",
+              margin: "2px 0 0 7px",
+              fontSize: "13px",
+              fontWeight: 400,
+            }}
+          >
+            {c.postedBy}
+          </h5>
+          <h5
+            style={{
+              display: "inline",
+              color: "#818384",
+              opacity: ".6",
+              margin: "2px 0 0 4px",
+              fontSize: "13px",
+              fontWeight: 300,
+            }}
+          >
+            {c.points} points · {c.postedAt}
+          </h5>
+        </div>
+      )}
+    </>
   );
 }
 
@@ -131,9 +199,9 @@ export const Comments: React.FC = () => {
     FetchGetComments(commentsDispatch, postId);
   }, []);
 
-  useEffect(() => {
-    console.log(comments);
-  }, [comments]);
+  // useEffect(() => {
+  //   console.log(comments);
+  // }, [comments]);
 
   return (
     <>

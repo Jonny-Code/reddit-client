@@ -8,18 +8,20 @@
 
 .reddit-logo {
   padding: 8px 8px 8px 0;
+  max-width: 36px;
+  max-height: 36px;
 }
 
 .brand-text {
-  margin: 0;
+  margin: 0 18px 0 0;
   align-items: center;
   color: #d7dadc;
   font-weight: normal;
-  font-size: x-large;
+  font-size: 22px;
 }
 
 .row-header {
-  padding: 0 20px;
+  padding: 0 14px 0 20px;
   display: flex;
   height: 48px;
 }
@@ -32,9 +34,9 @@
 }
 
 .search-container {
-  max-width: 680px;
   height: 90%;
   width: 100%;
+  max-width: 824px;
   margin: 0 auto;
   display: flex;
   justify-content: center;

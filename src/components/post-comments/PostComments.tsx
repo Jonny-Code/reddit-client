@@ -46,7 +46,7 @@ export const PostComments: React.FC = () => {
 
   return (
     <>
-      <div className={`post-comments`}>
+      <div className="post-comments">
         <Link style={{ textDecoration: "none" }} to={`/r/${subName}`}>
           <div className="post-comments-content">
             <div className="post-comments-container">
@@ -154,11 +154,13 @@ export const PostComments: React.FC = () => {
                   style={{
                     maxWidth: "740px",
                     width: "100%",
+                    background: "#1a1a1b",
+                    padding: "0 10px",
                     display: "flex",
                     flexDirection: "column",
                   }}
                 >
-                  <CreateComment />
+                  {/* <CreateComment /> */}
                   <div
                     style={{
                       maxWidth: "740px",
@@ -338,18 +340,7 @@ export const PostComments: React.FC = () => {
                   <Comments />
                 </div>
 
-                <div
-                  style={{
-                    maxWidth: "312px",
-                    width: "100%",
-                    height: "300px",
-                    background: "#1a1a1b",
-                    borderRadius: "4px",
-                    margin: "0 0 0 10px",
-                    display: "flex",
-                    justifyContent: "center",
-                  }}
-                ></div>
+                <div className="post-comments-about"></div>
               </div>
             </div>
           </div>

@@ -2,6 +2,7 @@ import React, { useRef, useState, useContext } from "react";
 import { FetchPostComment } from "../../util/Fetch";
 import { CommentsContext } from "../../contexts/CommentsContext";
 import { CommentModel, CommentType } from "../../contexts/CommentType";
+import { useParams } from "react-router-dom";
 
 export const CreateComment: React.FC = () => {
   const [comment, setComment] = useState({
@@ -18,21 +19,25 @@ export const CreateComment: React.FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const { comments, commentsDispatch } = useContext(CommentsContext);
+  let { postId } = useParams();
 
   let thing2 = {
-    post: "5e86a68bfeb97545204c8293",
-    points: 2,
-    postedBy: "timmy",
-    postedAt: "1 min ago",
-    body: "reply",
+    post: "",
+    points: 12,
+    postedBy: "Laborum",
+    postedAt: "2 id irure",
+    body:
+      "Nostrud commodo ut laborum anim aliqua consequat pariatur ex duis quis. Incididunt elit minim id officia veniam ea veniam.",
     isReply: true,
-    repliesTo: ["5e963b0891571b111383ec05"],
+    repliesTo: ["5e989a838068e92eb0a78752", "5e98ba658068e92eb0a78753"],
+    hideComment: false,
     replies: [],
   };
 
   const handleSend = () => {
-    // FetchPostComment(commentsDispatch, thing2, thing2.post);
-    // FetchPostComment(commentsDispatch, comments, comment.post);
+    thing2.post = postId!;
+    console.log(postId);
+    FetchPostComment(commentsDispatch, thing2, thing2.post!);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

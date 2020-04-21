@@ -1,0 +1,14 @@
+.dropdown-subreddit {
+  border: 1px solid #2f2f31;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0 0 0 4px;
+  /* height: 32px;
+  max-width: 268px;
+  width: 100%; */
+}
+.dropdown-subreddit:hover {
+  border: 1px solid #4d4e50;
+}

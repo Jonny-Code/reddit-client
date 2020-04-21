@@ -7,7 +7,18 @@ export function commentReducer(state: any, payload: any) {
     case "add":
       return [...state, payload.comments];
     case "spread":
+      for (let i = 0; i < payload.comments.length; i++) {
+        payload.comments[i].hideComment = false;
+      }
       return [...payload.comments];
+    case "hide":
+      payload.c.hideComment = !payload.c.hideComment;
+      for (let i = 0; i < state.length; i++) {
+        if (state[i]._id === payload.c._id) {
+          state[i] = payload.c;
+        }
+      }
+      return [...state];
     case "remove":
       return state.filter((i: any) => i._id !== payload._id);
     case "update":

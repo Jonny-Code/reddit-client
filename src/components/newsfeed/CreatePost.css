@@ -1,0 +1,31 @@
+.create-post-container {
+  height: 90%;
+  width: 100%;
+  max-width: 496px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.create-post-container form {
+  margin: 0 0.8em;
+  width: 100%;
+  display: flex;
+}
+.create-post-container form input {
+  background-color: #272729;
+  color: #d7dadc;
+  padding: 0.7em 0 0.7em 1.2em;
+  border: 1px solid #444449;
+  border-radius: 3px;
+  width: 100%;
+}
+.create-post-container form input:hover {
+  background-color: #030303;
+  border: 1px solid #d7dadc;
+}
+.create-post-container form input:focus {
+  background-color: #030303;
+  border: 1px solid #d7dadc;
+  outline: none;
+}

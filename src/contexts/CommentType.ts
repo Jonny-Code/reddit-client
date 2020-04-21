@@ -8,6 +8,7 @@ export interface CommentType {
   postedAt: string;
   body: string;
   isReply: boolean;
+  hideComment?: boolean;
   replies: any[];
 }
 
@@ -24,5 +25,6 @@ export const CommentModel: CommentType = {
   postedAt: "",
   body: "",
   isReply: false,
+  hideComment: false,
   replies: [],
 };

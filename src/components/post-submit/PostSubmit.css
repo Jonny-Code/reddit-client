@@ -1,0 +1,75 @@
+/* Post */
+
+.post-submit {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.post-submit-content {
+  background-color: #191919c4;
+  border: 1px solid none;
+  width: 100%;
+  height: 100%;
+}
+
+.post-submit-container {
+  width: 100%;
+  background-color: #030303;
+  margin: 29px auto 0 auto;
+  padding: 0 0 20px 0;
+  z-index: 3;
+}
+
+.post-submit-about {
+  max-width: 312px;
+  width: 100%;
+  /* height: 300px; */
+  background: #1a1a1b;
+  border-radius: 4px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+.submit-post-title {
+  border: 1px solid #444449;
+}
+.submit-post-title:focus {
+  border: 1px solid #d7dadc;
+  outline: none;
+}
+.submit-post-body {
+  border: 1px solid #1a1a1b;
+}
+.submit-post-body:focus {
+  border: 1px solid #d7dadc;
+  outline: none;
+}
+.submit-post-btn {
+  background: #1a1a1b;
+}
+.submit-post-btn-active {
+  color: white;
+  border: none;
+  border-bottom: 2px solid white;
+  border-right: 1px solid #2f2f31;
+}
+.post-svg-active {
+  fill: white;
+}
+.hover-submit-btn:hover {
+  background: rgb(35, 35, 37);
+}
+
+@media only screen and (max-width: 960px) {
+  .post-submit-about {
+    display: none;
+  }
+}

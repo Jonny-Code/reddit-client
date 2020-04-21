@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Banner } from "../banner/Banner";
 import { Header } from "../header/Header";
 import { Newsfeed } from "../newsfeed/Newsfeed";
+import { PostSubmit } from "../post-submit/PostSubmit";
+import { PostComments } from "../post-comments/PostComments";
 
 export const View: React.FC = () => {
   return (
@@ -13,11 +15,17 @@ export const View: React.FC = () => {
             <h1>home path</h1>
           </Route>
 
-          <Route path="/r/:subName">
+          <Route exact path="/r/:subName/comments/:postId">
+            <Header />
+            <PostComments />
+          </Route>
+          <Route exact path="/r/:subName/">
             <Header />
             <Banner />
             <Newsfeed />
           </Route>
+          <Route path="/r/:subName/submit" component={PostSubmit} />
+
           <Route path="*">
             <h1>wrong path</h1>
           </Route>

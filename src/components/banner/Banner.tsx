@@ -16,9 +16,9 @@ export const Banner: React.FC = () => {
     setSub(subreddit);
   }, [subreddit]);
 
-  useEffect(() => {
-    FetchGetSubreddit(subredditDispatch, postsDispatch, subName);
-  }, []);
+  // useEffect(() => {
+  //   FetchGetSubreddit(subredditDispatch, postsDispatch, subName);
+  // }, []);
 
   return (
     <div className="main-background-banner">
