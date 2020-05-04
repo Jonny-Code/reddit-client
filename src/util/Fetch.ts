@@ -75,7 +75,7 @@ export const FetchPostComment = async (
   console.log(r);
 };
 
-export const FetchAuth = async (data: any) => {
+export const FetchAuth = async (data: any, history: any) => {
   if (!data.email.length || !data.password.length) return;
   try {
     const res = await fetch("http://localhost:5000/users/authenticate", {
@@ -93,10 +93,23 @@ export const FetchAuth = async (data: any) => {
     localStorage.setItem("userName", name);
     localStorage.setItem("userEmail", email);
     localStorage.setItem("userToken", r.data.token);
+    history.go(0);
     console.log(r, localStorage);
   } catch (err) {
     console.error(err);
   }
+};
+
+export const FetchRegister = async (data: any) => {
+  const res = await fetch("http://localhost:5000/users/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  const r = await res.json();
+  console.log(r);
 };
 
 export const FetchPut = async (postsDispatch: any, data: any) => {

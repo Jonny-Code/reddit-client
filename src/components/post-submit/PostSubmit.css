@@ -28,6 +28,13 @@
   z-index: 3;
 }
 
+.col-3-post-submit {
+  width: 748px;
+}
+.col-2-post-submit {
+  width: 320px;
+  margin: 24px 0 0 0;
+}
 .post-submit-about {
   max-width: 312px;
   width: 100%;

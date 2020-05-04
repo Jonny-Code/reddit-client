@@ -1,16 +1,17 @@
-.about-container {
+.rules-container {
   background-color: rgb(26, 26, 27);
-  margin: 0 0 0 26px;
-  min-width: 276px;
-  padding: 0.8em;
+  margin: 14px 0 0 26px;
+  padding: 12px;
+  min-width: 286px;
   border: 1px solid rgb(47, 47, 49);
   border-radius: 4px;
 }
-.title-about {
+.title-rules {
   color: #818384;
   font-weight: 600;
   font-size: 15px;
   margin: 0;
+  padding: 0 0 20px 0;
 }
 
 hr {

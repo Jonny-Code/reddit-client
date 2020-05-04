@@ -8,6 +8,9 @@ export interface Subreddit {
   title: string;
   bannerImgSrc: string;
   logoImgSrc: string;
+  memberCount: number;
+  membersOnline: number;
+  createdAt: string;
   joined: boolean;
 }
 
@@ -24,5 +27,8 @@ export const SubredditModel = {
   title: "",
   bannerImgSrc: "",
   logoImgSrc: "",
+  memberCount: 0,
+  membersOnline: 0,
+  createdAt: "",
   joined: false,
 };

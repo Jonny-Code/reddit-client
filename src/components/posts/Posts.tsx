@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import moment from "moment";
 import { Link, useParams } from "react-router-dom";
 import { PostsContext } from "../../contexts/PostsContext";
 import { ReactComponent as Arrow } from "./svg/arrow.svg";
@@ -9,6 +10,10 @@ import "./Posts.css";
 export const Posts: React.FC = () => {
   const { posts } = useContext(PostsContext);
   let { subName } = useParams();
+
+  useEffect(() => {
+    console.log(moment());
+  }, []);
 
   return (
     <>
@@ -54,7 +59,7 @@ export const Posts: React.FC = () => {
                 <span className="pointer hover-underline">
                   {p.postedBy}
                 </span>{" "}
-                {p.postedAt}
+                {moment(p.postedAt).fromNow()}
               </small>
               <h3 className="post-title">{p.title}</h3>
               {p.imgSrc.length ? (

@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import moment from "moment";
 import { ReactComponent as Arrow } from "./svg/arrow.svg";
 import { ReactComponent as CommentSvg } from "./svg/comment.svg";
 import { Comments } from "./Comments";
@@ -252,7 +253,7 @@ export const PostComments: React.FC = () => {
                           <span className="hover-underline pointer">
                             {postContent.postedBy}
                           </span>{" "}
-                          {postContent.postedAt}
+                          {moment(postContent.postedAt).fromNow()}
                         </h4>
                       </div>
                       <h3

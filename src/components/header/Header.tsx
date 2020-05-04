@@ -9,7 +9,7 @@ import { ReactComponent as Close } from "./svg/x.svg";
 import { FetchAuth, FetchGetSubreddit } from "../../util/Fetch";
 import { SubredditContext } from "../../contexts/SubredditContext";
 import { SubredditModel, Subreddit } from "../../contexts/Subreddit";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { PostsContext } from "../../contexts/PostsContext";
 import { DropdownUser } from "../dropdowns/DropdownUser";
 import { DropdownSubreddit } from "../dropdowns/DropdownSubreddit";
@@ -26,6 +26,7 @@ export const Header: React.FC = () => {
   const signModalRef = useRef<HTMLDivElement>(null);
   const logModalRef = useRef<HTMLDivElement>(null);
   let { subName } = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     FetchGetSubreddit(subredditDispatch, postsDispatch, subName);
@@ -76,7 +77,7 @@ export const Header: React.FC = () => {
   };
 
   const login = () => {
-    FetchAuth(user);
+    FetchAuth(user, history);
   };
 
   return (

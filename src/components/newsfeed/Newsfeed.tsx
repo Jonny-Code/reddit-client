@@ -1,11 +1,11 @@
 import React from "react";
-import { Route } from "react-router-dom";
 import { Posts } from "../posts/Posts";
 import { Navbar } from "../navbar/Navbar";
 import { About } from "../about/About";
-import { PostComments } from "../post-comments/PostComments";
 import { CreatePost } from "./CreatePost";
+import { Rules } from "../rules/Rules";
 import "./Newsfeed.css";
+import { Moderators } from "../moderators/Moderators";
 
 export const Newsfeed: React.FC = () => {
   return (
@@ -18,6 +18,8 @@ export const Newsfeed: React.FC = () => {
         </div>
         <div className="col-2-news">
           <About />
+          <Rules />
+          <Moderators />
         </div>
       </div>
     </>

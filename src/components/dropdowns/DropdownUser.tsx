@@ -25,7 +25,7 @@ export const DropdownUser: React.FC = () => {
             fontWeight: 500,
           }}
         >
-          Jonny-Code
+          {localStorage.userName}
         </h4>
 
         <div
