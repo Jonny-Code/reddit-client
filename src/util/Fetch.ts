@@ -72,6 +72,7 @@ export const FetchPostComment = async (
     body: JSON.stringify(data),
   });
   const r = await res.json();
+  commentsDispatch({ type: "add", comments: r.data });
   console.log(r);
 };
 

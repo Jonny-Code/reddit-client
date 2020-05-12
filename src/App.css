@@ -56,6 +56,11 @@
   border-right: 2px solid rgb(79, 79, 85);
 }
 
+/* Text-Decoration */
+.text-decoration-none {
+  text-decoration: none;
+}
+
 /* Hover */
 .hover-underline:hover {
   text-decoration: underline;
@@ -259,6 +264,9 @@
 }
 .ml-5 {
   margin-left: 1.6em;
+}
+.mr-auto {
+  margin: 0 0 0 auto;
 }
 .mr-1 {
   margin-right: 0.3em;

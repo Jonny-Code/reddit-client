@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { ReactComponent as Mail } from "./svg/mail.svg";
 import { moderatorsList } from "./ModeratorsList";
 import "./Moderators.css";
 
 export const Moderators: React.FC = () => {
-  const [moderators, setModerators] = useState(moderatorsList);
+  const [moderators] = useState(moderatorsList);
 
   return (
     <div className="moderators-container">
@@ -26,8 +26,9 @@ export const Moderators: React.FC = () => {
           width: "100%",
         }}
       >
-        {moderators.map((i) => (
+        {moderators.map((i, x) => (
           <div
+            key={x}
             style={{
               cursor: "pointer",
               color: "#4fbcff",

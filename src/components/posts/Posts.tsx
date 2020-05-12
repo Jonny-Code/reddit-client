@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import moment from "moment";
 import { Link, useParams } from "react-router-dom";
 import { PostsContext } from "../../contexts/PostsContext";
@@ -10,10 +10,6 @@ import "./Posts.css";
 export const Posts: React.FC = () => {
   const { posts } = useContext(PostsContext);
   let { subName } = useParams();
-
-  useEffect(() => {
-    console.log(moment());
-  }, []);
 
   return (
     <>

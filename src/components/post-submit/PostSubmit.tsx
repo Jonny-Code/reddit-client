@@ -11,15 +11,15 @@ import { ReactComponent as LinkSvg } from "./svg/link.svg";
 import { ReactComponent as PollSvg } from "./svg/poll.svg";
 import { ReactComponent as PlusSvg } from "./svg/plus.svg";
 import { ReactComponent as DownArrowSvg } from "./svg/down-arrow-1.svg";
-import { FetchPost, FetchRegister } from "../../util/Fetch";
+import { FetchPost } from "../../util/Fetch";
 import { PostsContext } from "../../contexts/PostsContext";
-import "./PostSubmit.css";
 import { About } from "../about/About";
 import { Rules } from "../rules/Rules";
+import "./PostSubmit.css";
 
 export const PostSubmit: React.FC = () => {
   const { subreddit } = useContext(SubredditContext);
-  const { posts, postsDispatch } = useContext(PostsContext);
+  const { postsDispatch } = useContext(PostsContext);
   const [subredditContent, setSubredditContent] = useState<Subreddit>(
     SubredditModel
   );
@@ -30,7 +30,7 @@ export const PostSubmit: React.FC = () => {
     if (!Array.isArray(subreddit)) {
       setSubredditContent(subreddit);
     }
-  });
+  }, [subreddit]);
   const handleChange = (e: any) => {
     setForm({
       ...form,
@@ -58,7 +58,7 @@ export const PostSubmit: React.FC = () => {
   return (
     <div className="post-submit">
       <Header />
-      <Link style={{ textDecoration: "none" }} to={`/r/${subName}`}>
+      <Link className="text-decoration-none" to={`/r/${subName}`}>
         <div className="post-submit-content">
           <div className="post-submit-container">
             <div

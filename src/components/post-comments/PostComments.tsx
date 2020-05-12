@@ -1,25 +1,41 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import moment from "moment";
-import { ReactComponent as Arrow } from "./svg/arrow.svg";
+import { ReactComponent as ArrowSvg } from "./svg/arrow.svg";
 import { ReactComponent as CommentSvg } from "./svg/comment.svg";
-import { Comments } from "./Comments";
 import { PostsContext } from "../../contexts/PostsContext";
 import { Post, PostModel } from "../../contexts/Post";
 import { SubredditContext } from "../../contexts/SubredditContext";
 import { Subreddit, SubredditModel } from "../../contexts/Subreddit";
-import { CreateComment } from "../newsfeed/CreateComment";
+import { CommentsContext } from "../../contexts/CommentsContext";
+import { FetchPostComment } from "../../util/Fetch";
+import { About } from "../about/About";
+import { Comments } from "./Comments";
 import "./PostComments.css";
 
 export const PostComments: React.FC = () => {
   const { posts } = useContext(PostsContext);
   const { subreddit } = useContext(SubredditContext);
+  const { commentsDispatch } = useContext(CommentsContext);
   const [postContent, setPostContent] = useState<Post>(PostModel);
   const [subredditContent, setSubredditContent] = useState<Subreddit>(
     SubredditModel
   );
+  const [form, setForm] = useState({ comment: "" });
   const [isShowing, setIsShowing] = useState(false);
   let { subName, postId } = useParams();
+
+  const JSToCSS = (JS: any) => {
+    let cssString = "";
+    for (let objectKey in JS) {
+      cssString +=
+        objectKey.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`) +
+        ": " +
+        JS[objectKey] +
+        ";\n";
+    }
+    return cssString;
+  };
 
   useEffect(() => {
     if (!Array.isArray(subreddit)) {
@@ -45,10 +61,36 @@ export const PostComments: React.FC = () => {
     };
   }, [postId]);
 
+  const handleSend = () => {
+    console.log(form);
+
+    let c = {
+      post: postId,
+      points: 0,
+      postedBy: localStorage.userName,
+      postedAt: moment(),
+      body: form.comment,
+      isReply: false,
+      repliesTo: [],
+      hideComment: false,
+      replies: [],
+    };
+
+    FetchPostComment(commentsDispatch, c, postId!);
+  };
+
+  const handleChange = (e: any) => {
+    setForm({
+      ...form,
+      comment: e.target.value,
+    });
+    console.log(form);
+  };
+
   return (
     <>
       <div className="post-comments">
-        <Link style={{ textDecoration: "none" }} to={`/r/${subName}`}>
+        <Link className="text-decoration-none" to={`/r/${subName}`}>
           <div className="post-comments-content">
             <div className="post-comments-container">
               <div
@@ -57,51 +99,16 @@ export const PostComments: React.FC = () => {
                 }}
                 className="post-comments-header"
               >
-                <div
-                  style={{
-                    display: "flex",
-                    width: "100%",
-                  }}
-                >
-                  <div
-                    style={{
-                      borderLeft: "1px solid rgb(60, 60, 63)",
-                      borderRight: "1px solid rgb(60, 60, 63)",
-                      padding: "0 4px",
-                      margin: "0 12px 0 32px",
-                      height: "26px",
-                      maxWidth: "100px",
-                      display: "flex",
-                      flex: 1,
-                      justifyContent: "space-evenly",
-                      alignItems: "center",
-                    }}
-                  >
-                    <span
-                      className="hover-nav-btn pointer d-flex align-items-center justify-content-center"
-                      style={{
-                        height: "26px",
-                        width: "28px",
-                        paddingTop: "2px",
-                      }}
-                    >
-                      <Arrow />
+                <div className="d-flex w-100">
+                  <div className="post-comments-header-vote-col">
+                    <span className="post-comments-arrow-up hover-nav-btn">
+                      <ArrowSvg />
                     </span>
-                    <span
-                      style={{ width: "20px" }}
-                      className="votes fs-14 font-weight-bold"
-                    >
+                    <span className="post-comments-header-votes">
                       {postContent.votes}
                     </span>
-                    <span
-                      className="hover-nav-btn pointer d-flex align-items-center justify-content-center"
-                      style={{
-                        height: "26px",
-                        width: "28px",
-                        paddingBottom: "3px",
-                      }}
-                    >
-                      <Arrow style={{ transform: "rotate(180deg)" }} />
+                    <span className="post-comments-header-arrow-down hover-nav-btn">
+                      <ArrowSvg className="flip-arrow" />
                     </span>
                   </div>
 
@@ -161,7 +168,6 @@ export const PostComments: React.FC = () => {
                     flexDirection: "column",
                   }}
                 >
-                  {/* <CreateComment /> */}
                   <div
                     style={{
                       maxWidth: "740px",
@@ -191,7 +197,7 @@ export const PostComments: React.FC = () => {
                           textAlign: "center",
                         }}
                       >
-                        <Arrow />
+                        <ArrowSvg />
                       </span>
                       <span className="votes fs-14 font-weight-bold mr-1 ml-1">
                         {postContent.votes}
@@ -206,12 +212,13 @@ export const PostComments: React.FC = () => {
                           textAlign: "center",
                         }}
                       >
-                        <Arrow style={{ transform: "rotate(180deg)" }} />
+                        <ArrowSvg style={{ transform: "rotate(180deg)" }} />
                       </span>
                     </div>
                     <div
                       style={{
-                        flex: 16,
+                        flex: 24,
+                        margin: "0 6px",
                       }}
                     >
                       <div
@@ -249,7 +256,7 @@ export const PostComments: React.FC = () => {
                           }}
                           className="text-light fs-12 font-weight-lighter"
                         >
-                          Posted by u/{" "}
+                          Posted by u/
                           <span className="hover-underline pointer">
                             {postContent.postedBy}
                           </span>{" "}
@@ -275,14 +282,27 @@ export const PostComments: React.FC = () => {
                         {postContent.body}
                       </h5>
                       <div className="d-flex">
-                        <button className="btn-comments d-flex align-items-center">
+                        <button className="btn-comments focus-outline-none d-flex align-items-center">
                           <CommentSvg className="mr-1" /> {postContent.comments}{" "}
                           Comments
                         </button>
-                        <button className="btn-share">Share</button>
-                        <button className="btn-save">Save</button>
-                        <button className="btn-hide">Hide</button>
-                        <button className="btn-report">Report</button>
+                        {localStorage.userToken ? (
+                          <button className="btn-share focus-outline-none">
+                            Give Award
+                          </button>
+                        ) : null}
+                        <button className="btn-share focus-outline-none">
+                          Share
+                        </button>
+                        <button className="btn-save focus-outline-none">
+                          Save
+                        </button>
+                        <button className="btn-hide focus-outline-none">
+                          Hide
+                        </button>
+                        <button className="btn-report focus-outline-none">
+                          Report
+                        </button>
                         <span
                           style={{
                             margin: "auto 14px auto auto",
@@ -292,56 +312,150 @@ export const PostComments: React.FC = () => {
                           90% Upvoted
                         </span>
                       </div>
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          border: "1px solid rgb(60, 60, 63)",
-                          borderRadius: "4px",
-                          margin: "18px 22px 18px 10px",
-                          padding: "5px 0",
-                        }}
-                      >
-                        <h4
+
+                      {localStorage.userToken ? (
+                        <div
                           style={{
-                            margin: "6px",
+                            display: "flex",
+                            flexDirection: "column",
+                            margin: "24px 12px 20px 12px",
+                            maxWidth: "648px",
+                            width: "100%",
+                          }}
+                        >
+                          <h5
+                            style={{
+                              margin: "4px 0",
+                              color: "white",
+                              fontSize: "13px",
+                              fontWeight: 290,
+                            }}
+                          >
+                            Comment as{" "}
+                            <span
+                              style={{
+                                cursor: "pointer",
+                                color: "#4fbcff",
+                              }}
+                              className="hover-underline"
+                            >
+                              {localStorage.userName}
+                            </span>
+                          </h5>
+                          <form
+                            style={{
+                              width: "100%",
+                              display: "flex",
+                              border: "1px solid #444449",
+                              borderRadius: "3px",
+                            }}
+                            action="submit"
+                          >
+                            <textarea
+                              onChange={handleChange}
+                              className="submit-comment-body"
+                              style={{
+                                background: "#1a1a1b",
+                                color: "#d7dadc",
+                                padding: "10px 0 10px 10px",
+                                fontSize: "14px",
+                                width: "100%",
+                              }}
+                              placeholder="What are your thoughts?"
+                              name="body"
+                              id=""
+                              cols={20}
+                              rows={8}
+                            ></textarea>
+                          </form>
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "flex-end",
+                              background: "#29292c",
+                              color: "#d7dadc",
+                              padding: "4px 0",
+                              borderLeft: "1px solid #444449",
+                              borderRight: "1px solid #444449",
+                              borderBottom: "1px solid #444449",
+                              borderRadius: "3px",
+                              width: "100%",
+                            }}
+                          >
+                            <button
+                              onClick={handleSend}
+                              style={{
+                                cursor: form.comment.length
+                                  ? "pointer"
+                                  : "not-allowed",
+                                background: "#d7dadc",
+                                color: form.comment.length ? "black" : "grey",
+                                padding: "4px 14px",
+                                margin: "0 8px 0 0",
+                                border: "1px solid #d7dadc",
+                                borderRadius: "3px",
+                                fontFamily: "monospace",
+                                fontWeight: 600,
+                              }}
+                            >
+                              COMMENT
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            border: "1px solid rgb(60, 60, 63)",
+                            borderRadius: "4px",
+                            margin: "18px 22px 18px 10px",
                             padding: "5px 0",
                           }}
-                          className="text-light font-weight-light"
                         >
-                          Log in or sign up to leave a comment
-                        </h4>
-                        <span
-                          style={{ display: "flex", margin: "0 6px 0 auto" }}
-                        >
-                          <button
+                          <h4
                             style={{
-                              marginRight: "2px",
-                              width: "80px",
-                              height: "31px",
+                              margin: "6px",
+                              padding: "5px 0",
                             }}
-                            className="btn-dark pointer focus-outline-none"
+                            className="text-light font-weight-light"
                           >
-                            LOG IN
-                          </button>
-                          <button
-                            style={{
-                              marginLeft: "2px",
-                              width: "80px",
-                              height: "31px",
-                            }}
-                            className="btn-light pointer focus-outline-none"
+                            Log in or sign up to leave a comment
+                          </h4>
+                          <span
+                            style={{ display: "flex", margin: "0 6px 0 auto" }}
                           >
-                            SIGN UP
-                          </button>
-                        </span>
-                      </div>
+                            <button
+                              style={{
+                                marginRight: "2px",
+                                width: "80px",
+                                height: "31px",
+                              }}
+                              className="btn-dark pointer focus-outline-none"
+                            >
+                              LOG IN
+                            </button>
+                            <button
+                              style={{
+                                marginLeft: "2px",
+                                width: "80px",
+                                height: "31px",
+                              }}
+                              className="btn-light pointer focus-outline-none"
+                            >
+                              SIGN UP
+                            </button>
+                          </span>
+                        </div>
+                      )}
                     </div>
                   </div>
                   <Comments />
                 </div>
 
-                <div className="post-comments-about"></div>
+                <div className="post-comments-about">
+                  <About />
+                </div>
               </div>
             </div>
           </div>

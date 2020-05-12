@@ -1,3 +1,9 @@
+.dropdown-user-container {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
 .dropdown-user {
   border: 1px solid #1a1a1b;
   border-radius: 3px;
@@ -11,4 +17,30 @@
 }
 .dropdown-user:hover {
   border: 1px solid #4d4e50;
+}
+.dropdown-user-flex-col {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0 0 0 2px;
+}
+.dropdown-user-name {
+  color: #dfe3e5;
+  display: inline;
+  margin: 2px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.dropdown-user-karma-container {
+  display: flex;
+  align-items: center;
+  margin: 2px 0 0 0;
+}
+.dropdown-user-karma {
+  color: #a8aaab;
+  display: inline;
+  margin: 0 2px 0 0;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: Arial;
 }

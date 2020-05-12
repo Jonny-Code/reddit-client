@@ -1,34 +1,17 @@
-import React, { useReducer, useEffect } from "react";
-import { View } from "./components/view/View";
+import React, { useReducer } from "react";
 import { PostsContext, postReducer } from "./contexts/PostsContext";
 import {
   SubredditContext,
   subredditReducer,
 } from "./contexts/SubredditContext";
-import "./App.css";
 import { commentReducer, CommentsContext } from "./contexts/CommentsContext";
+import { View } from "./components/view/View";
+import "./App.css";
 
 function App() {
   const [posts, postsDispatch] = useReducer(postReducer, []);
   const [subreddit, subredditDispatch] = useReducer(subredditReducer, []);
   const [comments, commentsDispatch] = useReducer(commentReducer, []);
-
-  useEffect(() => {
-    let obj = (function () {
-      let _prop1 = "private info";
-      return {
-        prop2: 1212,
-        get prop1() {
-          return "asd" + _prop1;
-        },
-        set prop1(_val) {
-          _prop1 = _val;
-        },
-      };
-    })();
-    obj.prop1 = "123";
-    console.log(obj);
-  }, []);
 
   return (
     <>

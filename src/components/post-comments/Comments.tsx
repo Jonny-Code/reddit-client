@@ -1,11 +1,18 @@
-import React, { useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
-import { FetchGetComments } from "../../util/Fetch";
+import React, { useEffect, useContext, useState } from "react";
+import { useParams, useHistory } from "react-router-dom";
+import moment from "moment";
+import { FetchGetComments, FetchPostComment } from "../../util/Fetch";
 import { CommentsContext } from "../../contexts/CommentsContext";
 import { ReactComponent as Arrow } from "./svg/arrow.svg";
+import { ReactComponent as CommentSvg } from "./svg/comment.svg";
+import "./Comments.css";
 
 function Comment({ c }: any) {
-  const { comments, commentsDispatch } = useContext(CommentsContext);
+  const { commentsDispatch } = useContext(CommentsContext);
+  const [form, setForm] = useState({ comment: "" });
+  const [showReply, setShowReply] = useState(false);
+  let { postId } = useParams();
+  let history = useHistory();
 
   const nestedComments = (c.replies || []).map((c: any) => {
     return (
@@ -22,6 +29,41 @@ function Comment({ c }: any) {
       />
     );
   });
+
+  const handleReply = () => {
+    setShowReply(!showReply);
+  };
+
+  const handleSend = (x: any) => {
+    console.log(form);
+    console.log(x);
+
+    let c = {
+      post: postId,
+      points: 0,
+      postedBy: localStorage.userName,
+      postedAt: moment(),
+      body: form.comment,
+      isReply: true,
+      repliesTo: [...x.repliesTo, x._id],
+      hideComment: false,
+      replies: [],
+    };
+    console.log(c);
+
+    FetchPostComment(commentsDispatch, c, postId!);
+    // setShowReply(!showReply);
+
+    history.go(0);
+  };
+
+  const handleChange = (e: any) => {
+    setForm({
+      ...form,
+      comment: e.target.value,
+    });
+    console.log(form);
+  };
 
   return (
     <>
@@ -110,7 +152,7 @@ function Comment({ c }: any) {
                 fontWeight: 300,
               }}
             >
-              {c.points} points · {c.postedAt}
+              {c.points} points · {moment(c.postedAt).fromNow()}
             </h5>
             <h5
               style={{
@@ -122,6 +164,98 @@ function Comment({ c }: any) {
             >
               {c.body}
             </h5>
+            <div className="d-flex">
+              <button
+                onClick={handleReply}
+                className="btn-comments-post-comments focus-outline-none d-flex align-items-center"
+              >
+                <CommentSvg className="mr-1" />
+                Reply
+              </button>
+              <button className="btn-share-post-comments focus-outline-none">
+                Give Award
+              </button>
+              <button className="btn-share-post-comments focus-outline-none">
+                Share
+              </button>
+              <button className="btn-report-post-comments focus-outline-none">
+                Report
+              </button>
+              <button className="btn-save-post-comments focus-outline-none">
+                Save
+              </button>
+            </div>
+            {showReply ? (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  margin: "24px 12px 20px 12px",
+                  maxWidth: "648px",
+                  width: "100%",
+                }}
+              >
+                <form
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    border: "1px solid #444449",
+                    borderRadius: "3px",
+                  }}
+                  action="submit"
+                >
+                  <textarea
+                    onChange={handleChange}
+                    className="submit-comment-body"
+                    style={{
+                      background: "#1a1a1b",
+                      color: "#d7dadc",
+                      padding: "10px 0 10px 10px",
+                      fontSize: "14px",
+                      width: "100%",
+                    }}
+                    placeholder="What are your thoughts?"
+                    name="body"
+                    id=""
+                    cols={20}
+                    rows={8}
+                  ></textarea>
+                </form>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    background: "#29292c",
+                    color: "#d7dadc",
+                    padding: "4px 0",
+                    borderLeft: "1px solid #444449",
+                    borderRight: "1px solid #444449",
+                    borderBottom: "1px solid #444449",
+                    borderRadius: "3px",
+                    width: "100%",
+                  }}
+                >
+                  <button
+                    onClick={() => {
+                      handleSend(c);
+                    }}
+                    style={{
+                      cursor: form.comment.length ? "pointer" : "not-allowed",
+                      background: "#d7dadc",
+                      color: form.comment.length ? "black" : "grey",
+                      padding: "4px 14px",
+                      margin: "0 8px 0 0",
+                      border: "1px solid #d7dadc",
+                      borderRadius: "3px",
+                      fontFamily: "monospace",
+                      fontWeight: 600,
+                    }}
+                  >
+                    COMMENT
+                  </button>
+                </div>
+              </div>
+            ) : null}
             {nestedComments}
           </div>
         </div>
@@ -196,12 +330,10 @@ export const Comments: React.FC = () => {
   const { postId } = useParams();
 
   useEffect(() => {
-    FetchGetComments(commentsDispatch, postId);
+    comments.length
+      ? console.log("no length")
+      : FetchGetComments(commentsDispatch, postId);
   }, []);
-
-  // useEffect(() => {
-  //   console.log(comments);
-  // }, [comments]);
 
   return (
     <>

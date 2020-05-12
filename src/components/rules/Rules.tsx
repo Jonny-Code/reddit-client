@@ -1,22 +1,17 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { SubredditContext } from "../../contexts/SubredditContext";
 import { rulesList } from "./RulesList";
 import { ReactComponent as OpenSvg } from "./svg/open.svg";
 import "./Rules.css";
 
 export const Rules: React.FC = () => {
-  const [rules, setRules] = useState(rulesList);
   const { subreddit } = useContext(SubredditContext);
-
-  useEffect(() => {
-    console.log(rulesList);
-  }, [rulesList]);
 
   return (
     <div className="rules-container">
       <h4 className="title-rules">{`r/${subreddit.name} Rules`}</h4>
-      {rules.map((i, x) => (
-        <>
+      {rulesList.map((i, x) => (
+        <div key={x}>
           <div
             style={{
               display: "flex",
@@ -42,13 +37,9 @@ export const Rules: React.FC = () => {
                 }}
               />
             </div>
-
-            {/* <h4 className="text-lighter fs-15 font-weight-lighter m-0 pb-2">
-              ^
-            </h4> */}
           </div>
           <hr className="mt-1 mb-1" />
-        </>
+        </div>
       ))}
     </div>
   );

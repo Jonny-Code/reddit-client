@@ -1,0 +1,25 @@
+.btn-comments-post-comments,
+.btn-share-post-comments,
+.btn-save-post-comments,
+.btn-options-post-comments,
+.btn-hide-post-comments,
+.btn-report-post-comments {
+  display: flex;
+  flex-direction: row;
+  margin: 6px 4px;
+  padding: 2px 4px;
+  cursor: pointer;
+  background-color: #1a1a1b;
+  border: 1px solid #1a1a1b;
+  color: #919495;
+  font-size: 12px;
+  font-weight: 700;
+}
+.btn-comments-post-comments:hover,
+.btn-share-post-comments:hover,
+.btn-save-post-comments:hover,
+.btn-options-post-comments:hover,
+.btn-hide-post-comments:hover,
+.btn-report-post-comments:hover {
+  background-color: #303131;
+}

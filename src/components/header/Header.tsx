@@ -1,14 +1,13 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
-import { ReactComponent as RedditLogo } from "./svg/reddit.svg";
-import { ReactComponent as OfflineAccount } from "./svg/offline-account.svg";
-import { ReactComponent as DownArrow } from "./svg/down-arrow-1.svg";
-import { ReactComponent as Search } from "./svg/search.svg";
-import { ReactComponent as Moon } from "./svg/moon.svg";
-import { ReactComponent as Coin } from "./svg/coin.svg";
-import { ReactComponent as Close } from "./svg/x.svg";
+import { ReactComponent as RedditLogoSvg } from "./svg/reddit.svg";
+import { ReactComponent as OfflineAccountSvg } from "./svg/offline-account.svg";
+import { ReactComponent as DownArrowSvg } from "./svg/down-arrow-1.svg";
+import { ReactComponent as SearchSvg } from "./svg/search.svg";
+import { ReactComponent as MoonSvg } from "./svg/moon.svg";
+import { ReactComponent as CoinSvg } from "./svg/coin.svg";
+import { ReactComponent as CloseSvg } from "./svg/x.svg";
 import { FetchAuth, FetchGetSubreddit } from "../../util/Fetch";
 import { SubredditContext } from "../../contexts/SubredditContext";
-import { SubredditModel, Subreddit } from "../../contexts/Subreddit";
 import { useParams, useHistory } from "react-router-dom";
 import { PostsContext } from "../../contexts/PostsContext";
 import { DropdownUser } from "../dropdowns/DropdownUser";
@@ -17,28 +16,19 @@ import "./Header.css";
 
 export const Header: React.FC = () => {
   const { subreddit, subredditDispatch } = useContext(SubredditContext);
-  const { posts, postsDispatch } = useContext(PostsContext);
+  const { postsDispatch } = useContext(PostsContext);
   const [isShowing, setIsShowing] = useState<boolean>(false);
   const [user, setUser] = useState<object>({ email: "", password: "" });
-  const [subredditContent, setSubredditContent] = useState<Subreddit>(
-    SubredditModel
-  );
   const signModalRef = useRef<HTMLDivElement>(null);
   const logModalRef = useRef<HTMLDivElement>(null);
   let { subName } = useParams();
   const history = useHistory();
 
   useEffect(() => {
-    FetchGetSubreddit(subredditDispatch, postsDispatch, subName);
-  }, []);
-
-  useEffect(() => {
-    console.log(subreddit);
-    if (!Array.isArray(subreddit)) {
-      setSubredditContent(subreddit);
-    }
-    console.log(subredditContent);
-  });
+    Array.isArray(subreddit)
+      ? FetchGetSubreddit(subredditDispatch, postsDispatch, subName)
+      : console.log("not array");
+  }, [subreddit, postsDispatch, subredditDispatch, subName]);
 
   const openSignupModal = () => {
     signModalRef.current?.classList.add("signup-modal-fadein");
@@ -84,29 +74,20 @@ export const Header: React.FC = () => {
     <header className="header">
       <div className="row-header">
         <div className="col-7-header">
-          <RedditLogo />
+          <RedditLogoSvg />
           <p className="brand-text">reddit</p>
           {localStorage.userToken ? (
             <DropdownSubreddit color="#1a1a1b" size={{ x: 270, y: 36 }} />
           ) : null}
           <div className="search-container">
             <form action="search">
-              <Search className="search-svg" />
+              <SearchSvg className="search-svg" />
               <input type="text" name="" placeholder="Search" />
             </form>
           </div>
         </div>
         {localStorage.userToken ? (
-          <div
-            style={{
-              flex: 2,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-end",
-            }}
-          >
-            <DropdownUser />
-          </div>
+          <DropdownUser />
         ) : (
           <div className="col-3-header ml-5">
             <button
@@ -120,10 +101,10 @@ export const Header: React.FC = () => {
                 <div className="login-modal-col-1"></div>
                 <div className="login-modal-col-2">
                   <span onClick={closeLoginModal} className="login-modal-close">
-                    <Close />
+                    <CloseSvg />
                   </span>
                   <div className="login-modal-container">
-                    <RedditLogo />
+                    <RedditLogoSvg />
                     <h4>Sign in</h4>
                     <input
                       onChange={updateField}
@@ -171,7 +152,7 @@ export const Header: React.FC = () => {
                     onClick={closeSignupModal}
                     className="signup-modal-close"
                   >
-                    <Close />
+                    <CloseSvg />
                   </span>
                   <div className="signup-modal-container">
                     <h4>
@@ -200,18 +181,18 @@ export const Header: React.FC = () => {
               onClick={() => setIsShowing(!isShowing)}
               className="dropdown pointer"
             >
-              <OfflineAccount />
-              <DownArrow />
+              <OfflineAccountSvg />
+              <DownArrowSvg />
             </div>
             {isShowing ? (
               <div className="dropdown-menu">
                 <h3>VIEW OPTIONS</h3>
                 <button type="submit">
-                  <Moon /> <span>Night Mode</span>
+                  <MoonSvg /> <span>Night Mode</span>
                 </button>
                 <h3>MORE STUFF</h3>
                 <button type="submit">
-                  <Coin />
+                  <CoinSvg />
                   <span className="coin-span">
                     <div>
                       <span>Reddit Coins</span>

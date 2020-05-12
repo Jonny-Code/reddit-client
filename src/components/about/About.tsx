@@ -15,8 +15,7 @@ export const About: React.FC = () => {
     if (!Array.isArray(subreddit)) {
       setSubredditContent(subreddit);
     }
-    console.log(subredditContent);
-  });
+  }, [subreddit]);
 
   return (
     <div className="about-container">
