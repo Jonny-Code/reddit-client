@@ -1,0 +1,30 @@
+.subreddit-form-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.subreddit-form-heading {
+  text-align: center;
+  margin: 0;
+  padding: 0 0 4px 0;
+  font-size: 28px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #d7dadc;
+}
+.subreddit-form-container input {
+  text-align: center;
+  background: #1a1a1b;
+  color: #d7dadc;
+  padding: 10px 0 10px 12px;
+  margin: 8px auto;
+  border-radius: 3px;
+  font-size: 14px;
+  width: 300px;
+  border: 1px solid #444449;
+}
+.subreddit-form-btn {
+  display: flex;
+  justify-content: center;
+}
+.subreddit-form-btn button {
+}

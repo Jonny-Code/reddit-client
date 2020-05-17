@@ -25,10 +25,15 @@ export const Header: React.FC = () => {
   const history = useHistory();
 
   useEffect(() => {
-    Array.isArray(subreddit)
-      ? FetchGetSubreddit(subredditDispatch, postsDispatch, subName)
-      : console.log("not array");
-  }, [subreddit, postsDispatch, subredditDispatch, subName]);
+    console.log("Header fetch sub");
+    FetchGetSubreddit(subredditDispatch, postsDispatch, subName);
+  }, [history]);
+
+  // useEffect(() => {
+  //   Array.isArray(subreddit)
+  //     ? FetchGetSubreddit(subredditDispatch, postsDispatch, subName)
+  //     : console.log("not array");
+  // }, [subreddit, postsDispatch, subredditDispatch, subName]);
 
   const openSignupModal = () => {
     signModalRef.current?.classList.add("signup-modal-fadein");

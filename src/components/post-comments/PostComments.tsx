@@ -14,7 +14,7 @@ import { Comments } from "./Comments";
 import "./PostComments.css";
 
 export const PostComments: React.FC = () => {
-  const { posts } = useContext(PostsContext);
+  const { posts, postsDispatch } = useContext(PostsContext);
   const { subreddit } = useContext(SubredditContext);
   const { commentsDispatch } = useContext(CommentsContext);
   const [postContent, setPostContent] = useState<Post>(PostModel);
@@ -77,6 +77,14 @@ export const PostComments: React.FC = () => {
     };
 
     FetchPostComment(commentsDispatch, c, postId!);
+    setPostContent({
+      ...postContent,
+      comments: postContent.comments + 1,
+    });
+    postsDispatch({
+      type: "update",
+      posts: postContent,
+    });
   };
 
   const handleChange = (e: any) => {

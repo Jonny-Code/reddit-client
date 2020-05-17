@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import moment from "moment";
 import { SubredditContext } from "../../contexts/SubredditContext";
 import { Subreddit, SubredditModel } from "../../contexts/Subreddit";
@@ -25,6 +25,7 @@ export const PostSubmit: React.FC = () => {
   );
   const [form, setForm] = useState({ title: "", body: "" });
   let { subName } = useParams();
+  let history = useHistory();
 
   useEffect(() => {
     if (!Array.isArray(subreddit)) {
@@ -40,7 +41,6 @@ export const PostSubmit: React.FC = () => {
   };
 
   const handleClick = (e: any) => {
-    // moment().format("MMMM Do YYYY, h:mm:ss a");
     let time = moment();
     console.log(time);
     FetchPost(postsDispatch, {
@@ -53,6 +53,7 @@ export const PostSubmit: React.FC = () => {
       body: form.body,
       comments: 0,
     });
+    history.push(`/r/${subName}`);
   };
 
   return (

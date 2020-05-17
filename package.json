@@ -20,7 +20,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && cp -r build/* ../reddit-server/public",
+    "purge": "rm -rfv build && rm -rfv ../reddit-server/public/*",
+    "stage": "cp -r ../reddit-server/* ../../../heroku/shmreddit",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

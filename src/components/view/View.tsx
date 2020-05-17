@@ -1,10 +1,11 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import { Banner } from "../banner/Banner";
 import { Header } from "../header/Header";
 import { Newsfeed } from "../newsfeed/Newsfeed";
 import { PostSubmit } from "../post-submit/PostSubmit";
 import { PostComments } from "../post-comments/PostComments";
+import { CreateSubreddit } from "../create-subreddit/CreateSubreddit";
 
 export const View: React.FC = () => {
   return (
@@ -12,7 +13,7 @@ export const View: React.FC = () => {
       <Router>
         <Switch>
           <Route exact path="/">
-            <h1>home path</h1>
+            <CreateSubreddit />
           </Route>
 
           <Route exact path="/r/:subName/comments/:postId">

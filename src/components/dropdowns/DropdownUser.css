@@ -44,3 +44,16 @@
   font-weight: 500;
   font-family: Arial;
 }
+@media only screen and (min-width: 610px) {
+  .dropdown-user {
+    border: 1px solid #1a1a1b;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    margin: 0 0 0 14px;
+    padding: 0 0 0 8px;
+    height: 36px;
+    max-width: 220px;
+    width: 100%;
+  }
+}

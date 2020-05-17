@@ -5,10 +5,14 @@
   align-items: center;
   margin: 0;
   padding: 0 0 0 4px;
-  /* height: 32px;
-  max-width: 268px;
-  width: 100%; */
 }
 .dropdown-subreddit:hover {
   border: 1px solid #4d4e50;
+}
+.dropdown-subreddit-name {
+  color: #dfe3e5;
+  display: inline;
+  margin: 2px 4px 0 4px;
+  font-size: 14px;
+  font-weight: 400;
 }

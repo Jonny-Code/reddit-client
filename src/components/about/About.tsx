@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import moment from "moment";
 import { ReactComponent as Cake } from "./svg/cake.svg";
 import { SubredditContext } from "../../contexts/SubredditContext";
 import { Subreddit, SubredditModel } from "../../contexts/Subreddit";
@@ -48,7 +49,7 @@ export const About: React.FC = () => {
           <Cake className="pt-1" />
         </span>
         <h4 className="d-inline text-lighter fs-14 font-weight-lighter mt-1 mb-2 pb-1 pt-1">
-          Created {subredditContent.createdAt.slice(0, 15)}
+          Created {moment(subredditContent.createdAt).format("MMM Do YYYY")}
         </h4>
       </div>
     </div>

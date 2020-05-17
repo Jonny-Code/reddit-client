@@ -26,18 +26,7 @@ export const DropdownSubreddit: React.FC<{
         src={subreddit.logoImgSrc}
         alt="subreddit-logo"
       />
-      <h4
-        style={{
-          color: "#dfe3e5",
-          display: "inline",
-          margin: "2px 4px 0 4px",
-          height: "18px",
-          fontSize: "14px",
-          fontWeight: 400,
-        }}
-      >
-        r/{subreddit.name}
-      </h4>
+      <h4 className="dropdown-subreddit-name">r/{subreddit.name}</h4>
       <DownArrow style={{ margin: "0 0 0 auto" }} />
     </div>
   );

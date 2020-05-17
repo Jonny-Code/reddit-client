@@ -429,3 +429,11 @@
     margin: 0 0 0 auto;
   }
 }
+@media only screen and (min-width: 610px) {
+  .col-7-header {
+    flex: 5;
+  }
+  .dropdown {
+    margin: 0 0 0 auto;
+  }
+}

@@ -1,6 +1,10 @@
+const local = "http://localhost:5000";
+const heroku = "https://shmreddit.herokuapp.com";
+const URL = local;
+
 export const FetchGetPosts = async (postsDispatch: any) => {
   try {
-    const res = await fetch("http://localhost:5000/posts");
+    const res = await fetch(`${URL}/posts`);
     const r = await res.json();
     console.log(r);
     if (r.status === "error") {
@@ -19,7 +23,7 @@ export const FetchGetSubreddit = async (
   subredditName: any
 ) => {
   try {
-    const res = await fetch("http://localhost:5000/subreddit/" + subredditName);
+    const res = await fetch(`${URL}/subreddits/` + subredditName);
     const r = await res.json();
     console.log(r);
     if (r.status === "error") {
@@ -34,7 +38,7 @@ export const FetchGetSubreddit = async (
 };
 
 export const FetchGetComments = async (commentsDispatch: any, postId: any) => {
-  const res = await fetch("http://localhost:5000/comments/" + postId);
+  const res = await fetch(`${URL}/comments/` + postId);
   const r = await res.json();
   console.log(r);
   if (r.status === "error") {
@@ -45,7 +49,7 @@ export const FetchGetComments = async (commentsDispatch: any, postId: any) => {
 };
 
 export const FetchPost = async (postsDispatch: any, data: any) => {
-  const res = await fetch("http://localhost:5000/posts", {
+  const res = await fetch(`${URL}/posts`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -54,9 +58,11 @@ export const FetchPost = async (postsDispatch: any, data: any) => {
   });
   const r = await res.json();
   console.log(r);
-  r.success
-    ? postsDispatch({ type: "add", posts: r.data })
-    : console.error(r.error);
+  if (r.success) {
+    postsDispatch({ type: "add", posts: r.data });
+  } else {
+    console.error(r.error);
+  }
 };
 
 export const FetchPostComment = async (
@@ -64,7 +70,7 @@ export const FetchPostComment = async (
   data: any,
   postId: string
 ) => {
-  const res = await fetch("http://localhost:5000/comments/" + postId, {
+  const res = await fetch(`${URL}/comments/` + postId, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -76,10 +82,23 @@ export const FetchPostComment = async (
   console.log(r);
 };
 
+export const FetchPostSubreddit = async (subredditDispatch: any, data: any) => {
+  const res = await fetch(`${URL}/subreddits/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  const r = await res.json();
+  // subredditDispatch({ type: "add", subreddit: r.data });
+  console.log(r);
+};
+
 export const FetchAuth = async (data: any, history: any) => {
   if (!data.email.length || !data.password.length) return;
   try {
-    const res = await fetch("http://localhost:5000/users/authenticate", {
+    const res = await fetch(`${URL}/users/authenticate`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -102,7 +121,7 @@ export const FetchAuth = async (data: any, history: any) => {
 };
 
 export const FetchRegister = async (data: any) => {
-  const res = await fetch("http://localhost:5000/users/register", {
+  const res = await fetch(`${URL}/users/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -114,7 +133,7 @@ export const FetchRegister = async (data: any) => {
 };
 
 export const FetchPut = async (postsDispatch: any, data: any) => {
-  const res = await fetch("http://localhost:5000/posts", {
+  const res = await fetch(`${URL}/posts`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -129,7 +148,7 @@ export const FetchPut = async (postsDispatch: any, data: any) => {
 };
 
 export const FetchDelete = async (postsDispatch: any, id: string) => {
-  const res = await fetch(`http://localhost:5000/posts/${id}`, {
+  const res = await fetch(`${URL}/posts/${id}`, {
     method: "DELETE",
   });
   const r = await res.json();
