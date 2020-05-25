@@ -15,7 +15,7 @@ import { DropdownSubreddit } from "../dropdowns/DropdownSubreddit";
 import "./Header.css";
 
 export const Header: React.FC = () => {
-  const { subreddit, subredditDispatch } = useContext(SubredditContext);
+  const { subredditDispatch } = useContext(SubredditContext);
   const { postsDispatch } = useContext(PostsContext);
   const [isShowing, setIsShowing] = useState<boolean>(false);
   const [user, setUser] = useState<object>({ email: "", password: "" });
@@ -28,12 +28,6 @@ export const Header: React.FC = () => {
     console.log("Header fetch sub");
     FetchGetSubreddit(subredditDispatch, postsDispatch, subName);
   }, [history]);
-
-  // useEffect(() => {
-  //   Array.isArray(subreddit)
-  //     ? FetchGetSubreddit(subredditDispatch, postsDispatch, subName)
-  //     : console.log("not array");
-  // }, [subreddit, postsDispatch, subredditDispatch, subName]);
 
   const openSignupModal = () => {
     signModalRef.current?.classList.add("signup-modal-fadein");

@@ -1,14 +1,14 @@
 .create-post-container {
   height: 90%;
   width: 100%;
-  max-width: 496px;
+  /* max-width: 596px; */
   margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .create-post-container form {
-  margin: 0 0.8em;
+  margin: 0 6px;
   width: 100%;
   display: flex;
 }

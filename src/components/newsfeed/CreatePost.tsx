@@ -1,9 +1,9 @@
 import React from "react";
+import { Link, useParams } from "react-router-dom";
 import { ReactComponent as OnlineAccount } from "./svg/online-account.svg";
 import { ReactComponent as AddImage } from "./svg/add-image.svg";
 import { ReactComponent as LinkPost } from "./svg/link-post.svg";
 import "./CreatePost.css";
-import { Link, useParams } from "react-router-dom";
 
 export const CreatePost: React.FC = () => {
   let { subName } = useParams();
@@ -35,12 +35,12 @@ export const CreatePost: React.FC = () => {
           </div>
           <AddImage
             style={{
-              margin: "0 auto",
+              margin: "0 10px",
             }}
           />
           <LinkPost
             style={{
-              margin: "0 auto",
+              margin: "0 10px",
             }}
           />
         </div>

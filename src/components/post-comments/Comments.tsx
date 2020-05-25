@@ -164,27 +164,29 @@ function Comment({ c }: any) {
             >
               {c.body}
             </h5>
-            <div className="d-flex">
-              <button
-                onClick={handleReply}
-                className="btn-comments-post-comments focus-outline-none d-flex align-items-center"
-              >
-                <CommentSvg className="mr-1" />
-                Reply
-              </button>
-              <button className="btn-share-post-comments focus-outline-none">
-                Give Award
-              </button>
-              <button className="btn-share-post-comments focus-outline-none">
-                Share
-              </button>
-              <button className="btn-report-post-comments focus-outline-none">
-                Report
-              </button>
-              <button className="btn-save-post-comments focus-outline-none">
-                Save
-              </button>
-            </div>
+            {localStorage.userToken ? (
+              <div className="d-flex">
+                <button
+                  onClick={handleReply}
+                  className="btn-comments-post-comments focus-outline-none d-flex align-items-center"
+                >
+                  <CommentSvg className="mr-1" />
+                  Reply
+                </button>
+                <button className="btn-share-post-comments focus-outline-none">
+                  Give Award
+                </button>
+                <button className="btn-share-post-comments focus-outline-none">
+                  Share
+                </button>
+                <button className="btn-report-post-comments focus-outline-none">
+                  Report
+                </button>
+                <button className="btn-save-post-comments focus-outline-none">
+                  Save
+                </button>
+              </div>
+            ) : null}
             {showReply ? (
               <div
                 style={{
@@ -333,6 +335,10 @@ export const Comments: React.FC = () => {
     comments.length
       ? console.log("no length")
       : FetchGetComments(commentsDispatch, postId);
+
+    return () => {
+      commentsDispatch({ type: "removeAll" });
+    };
   }, []);
 
   return (

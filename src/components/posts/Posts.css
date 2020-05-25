@@ -47,6 +47,24 @@
   min-width: 491px;
 }
 
+.upvoted {
+  fill: #d83030;
+}
+.upvoted-votes {
+  color: #d83030;
+  text-align: center;
+  width: 85%;
+  height: 19px;
+}
+.downvoted {
+  fill: #4652fa;
+}
+.downvoted-votes {
+  color: #4652fa;
+  text-align: center;
+  width: 85%;
+  height: 19px;
+}
 .btn-comments,
 .btn-share,
 .btn-save,

@@ -28,6 +28,8 @@ export function commentReducer(state: any, payload: any) {
         }
       }
       return [...state];
+    case "removeAll":
+      return [];
 
     default:
       return [];

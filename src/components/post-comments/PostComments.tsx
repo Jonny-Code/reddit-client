@@ -25,18 +25,6 @@ export const PostComments: React.FC = () => {
   const [isShowing, setIsShowing] = useState(false);
   let { subName, postId } = useParams();
 
-  const JSToCSS = (JS: any) => {
-    let cssString = "";
-    for (let objectKey in JS) {
-      cssString +=
-        objectKey.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`) +
-        ": " +
-        JS[objectKey] +
-        ";\n";
-    }
-    return cssString;
-  };
-
   useEffect(() => {
     if (!Array.isArray(subreddit)) {
       setSubredditContent(subreddit);
@@ -77,13 +65,12 @@ export const PostComments: React.FC = () => {
     };
 
     FetchPostComment(commentsDispatch, c, postId!);
-    setPostContent({
-      ...postContent,
-      comments: postContent.comments + 1,
-    });
+    let temp = postContent;
+    temp.comments += 1;
+    setPostContent(temp);
     postsDispatch({
       type: "update",
-      posts: postContent,
+      posts: temp,
     });
   };
 

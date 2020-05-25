@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import moment from "moment";
 import { Link, useParams } from "react-router-dom";
 import { PostsContext } from "../../contexts/PostsContext";
@@ -9,11 +9,9 @@ import "./Posts.css";
 
 export const Posts: React.FC = () => {
   const { posts } = useContext(PostsContext);
+  const [upvoted, setUpvoted] = useState(false);
+  const [downvoted, setDownvoted] = useState(false);
   let { subName } = useParams();
-
-  useEffect(() => {
-    console.log("render posts");
-  }, []);
 
   return (
     <>
@@ -26,6 +24,9 @@ export const Posts: React.FC = () => {
           <div className="posts-container">
             <div className="col-1-posts">
               <span
+                onClick={(e: React.MouseEvent) => {
+                  e.preventDefault();
+                }}
                 className="hover-nav-btn br-2 pointer"
                 style={{
                   height: "20px",
@@ -35,12 +36,37 @@ export const Posts: React.FC = () => {
                   textAlign: "center",
                 }}
               >
-                <Arrow />
+                <svg
+                  width="12pt"
+                  height="18pt"
+                  viewBox="0 0 13 16"
+                  version="1.1"
+                >
+                  <g id="surface1">
+                    <path
+                      className={upvoted ? "upvoted" : ""}
+                      id="hover-nav-svg-red"
+                      fill="#818384"
+                      d="M 11.320312 6.0625 L 6.714844 0.105469 C 6.664062 0.0390625 6.582031 0 6.5 0 C 6.417969 0 6.335938 0.0390625 6.285156 0.105469 L 1.679688 6.0625 C 1.617188 6.144531 1.605469 6.257812 1.652344 6.347656 C 1.699219 6.441406 1.792969 6.5 1.894531 6.5 L 4.332031 6.5 L 4.332031 12.730469 C 4.332031 12.878906 4.453125 13 4.605469 13 L 8.394531 13 C 8.546875 13 8.667969 12.878906 8.667969 12.730469 L 8.667969 6.5 L 11.105469 6.5 C 11.207031 6.5 11.300781 6.441406 11.347656 6.347656 C 11.394531 6.257812 11.382812 6.144531 11.320312 6.0625 Z M 11.320312 6.0625 "
+                    />
+                  </g>
+                </svg>
               </span>
-              <span className="votes fs-14 font-weight-bold mr-1 ml-1">
+              <span
+                className={
+                  upvoted
+                    ? "upvoted-votes"
+                    : downvoted
+                    ? "downvoted-votes"
+                    : "votes"
+                }
+              >
                 {p.votes}
               </span>
               <span
+                onClick={(e: React.MouseEvent) => {
+                  e.preventDefault();
+                }}
                 className="hover-nav-btn br-2 pointer"
                 style={{
                   height: "20px",
@@ -50,7 +76,23 @@ export const Posts: React.FC = () => {
                   textAlign: "center",
                 }}
               >
-                <Arrow style={{ transform: "rotate(180deg)" }} />
+                <svg
+                  style={{ transform: "rotate(180deg)" }}
+                  width="12pt"
+                  height="18pt"
+                  viewBox="0 0 13 16"
+                  version="1.1"
+                >
+                  <g id="surface1">
+                    <path
+                      className={downvoted ? "downvoted" : ""}
+                      id="hover-nav-svg-blue"
+                      fill="#818384"
+                      d="M 11.320312 6.0625 L 6.714844 0.105469 C 6.664062 0.0390625 6.582031 0 6.5 0 C 6.417969 0 6.335938 0.0390625 6.285156 0.105469 L 1.679688 6.0625 C 1.617188 6.144531 1.605469 6.257812 1.652344 6.347656 C 1.699219 6.441406 1.792969 6.5 1.894531 6.5 L 4.332031 6.5 L 4.332031 12.730469 C 4.332031 12.878906 4.453125 13 4.605469 13 L 8.394531 13 C 8.546875 13 8.667969 12.878906 8.667969 12.730469 L 8.667969 6.5 L 11.105469 6.5 C 11.207031 6.5 11.300781 6.441406 11.347656 6.347656 C 11.394531 6.257812 11.382812 6.144531 11.320312 6.0625 Z M 11.320312 6.0625 "
+                    />
+                  </g>
+                </svg>
+                {/* <Arrow style={{ transform: "rotate(180deg)" }} /> */}
               </span>
             </div>
             <div className="col-4-posts">

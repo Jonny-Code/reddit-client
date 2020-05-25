@@ -78,6 +78,9 @@
 .hover-nav-btn:hover #hover-nav-svg-red {
   fill: #d83030;
 }
+.hover-nav-btn:hover #hover-nav-svg-blue {
+  fill: #4652fa;
+}
 .hover-nav-btn:hover .text-light {
   color: #eeeff0;
 }
