@@ -6,7 +6,7 @@ import { ReactComponent as SearchSvg } from "./svg/search.svg";
 import { ReactComponent as MoonSvg } from "./svg/moon.svg";
 import { ReactComponent as CoinSvg } from "./svg/coin.svg";
 import { ReactComponent as CloseSvg } from "./svg/x.svg";
-import { FetchAuth, FetchGetSubreddit } from "../../util/Fetch";
+import { FetchAuth, FetchGetSubreddit, FetchRegister } from "../../util/Fetch";
 import { SubredditContext } from "../../contexts/SubredditContext";
 import { useParams, useHistory } from "react-router-dom";
 import { PostsContext } from "../../contexts/PostsContext";
@@ -18,7 +18,11 @@ export const Header: React.FC = () => {
   const { subredditDispatch } = useContext(SubredditContext);
   const { postsDispatch } = useContext(PostsContext);
   const [isShowing, setIsShowing] = useState<boolean>(false);
-  const [user, setUser] = useState<object>({ email: "", password: "" });
+  const [user, setUser] = useState<object>({
+    name: "",
+    email: "",
+    password: "",
+  });
   const signModalRef = useRef<HTMLDivElement>(null);
   const logModalRef = useRef<HTMLDivElement>(null);
   let { subName } = useParams();
@@ -67,6 +71,10 @@ export const Header: React.FC = () => {
 
   const login = () => {
     FetchAuth(user, history);
+  };
+
+  const signUp = () => {
+    FetchRegister(user);
   };
 
   return (
@@ -158,8 +166,27 @@ export const Header: React.FC = () => {
                       By having a Reddit account, you can join, vote, and
                       comment on all your favorite Reddit content.
                     </h4>
-                    <input type="text" placeholder="Email" />
-                    <button className="pointer">NEXT</button>
+                    <input
+                      onChange={updateField}
+                      name="name"
+                      type="text"
+                      placeholder="Username"
+                    />
+                    <input
+                      onChange={updateField}
+                      name="email"
+                      type="text"
+                      placeholder="Email"
+                    />
+                    <input
+                      onChange={updateField}
+                      name="password"
+                      type="text"
+                      placeholder="Password"
+                    />
+                    <button onClick={signUp} className="pointer">
+                      SIGN UP
+                    </button>
                     <small>
                       Already a Redditor?{" "}
                       <span className="text-blue pointer">LOG IN</span>

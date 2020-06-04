@@ -13,7 +13,7 @@ export const View: React.FC = () => {
       <Router>
         <Switch>
           <Route exact path="/">
-            <CreateSubreddit />
+            {/* <CreateSubreddit /> */}
           </Route>
 
           <Route exact path="/r/:subName/comments/:postId">

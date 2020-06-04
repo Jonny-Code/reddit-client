@@ -1,6 +1,6 @@
 const local = "http://localhost:5000";
 const heroku = "https://shmreddit.herokuapp.com";
-const URL = local;
+const URL = heroku;
 
 export const FetchGetPosts = async (postsDispatch: any) => {
   try {

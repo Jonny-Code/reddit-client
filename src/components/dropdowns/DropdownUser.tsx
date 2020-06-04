@@ -4,10 +4,17 @@ import { ReactComponent as OnlineAccountSvg } from "./svg/online-account.svg";
 import { ReactComponent as MoonSvg } from "./svg/moon.svg";
 import { ReactComponent as CoinSvg } from "./svg/coin.svg";
 import { ReactComponent as KarmaSvg } from "./svg/karma.svg";
+import { useHistory } from "react-router-dom";
 import "./DropdownUser.css";
 
 export const DropdownUser: React.FC = () => {
   const [isShowing, setIsShowing] = useState<boolean>(false);
+  const history = useHistory();
+
+  const logout = () => {
+    localStorage.clear();
+    history.go(0);
+  };
 
   return (
     <>
@@ -43,6 +50,10 @@ export const DropdownUser: React.FC = () => {
                 <div className="coin-amount">0 Coins</div>
               </div>
             </span>
+          </button>
+          <h3>LOGOUT</h3>
+          <button onClick={logout} type="submit">
+            <OnlineAccountSvg /> <span>Logout</span>
           </button>
         </div>
       ) : null}
