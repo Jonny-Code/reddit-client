@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
-import moment from "moment";
 import { ReactComponent as Cake } from "./svg/cake.svg";
 import { SubredditContext } from "../../contexts/SubredditContext";
 import { Subreddit, SubredditModel } from "../../contexts/Subreddit";
 import { abbreviateNumber } from "../../util/AbbreviateNumber";
+import moment from "moment";
 import "./About.css";
 
 export const About: React.FC = () => {
