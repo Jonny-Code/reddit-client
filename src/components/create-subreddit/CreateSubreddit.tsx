@@ -22,7 +22,6 @@ export const CreateSubreddit: React.FC = () => {
   const handleSend = () => {
     let temp = form;
     temp.createdAt = moment();
-    console.log(temp);
     FetchPostSubreddit(null, temp);
   };
 

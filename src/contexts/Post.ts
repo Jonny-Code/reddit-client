@@ -10,6 +10,8 @@ export interface Post {
   imgSrc: string;
   body: string;
   comments: number;
+  upvoted: boolean;
+  downvoted: boolean;
 }
 
 export interface PContext {
@@ -25,5 +27,7 @@ export const PostModel = {
   title: "",
   imgSrc: "",
   body: "",
-  comments: 0
+  comments: 0,
+  upvoted: false,
+  downvoted: false,
 };

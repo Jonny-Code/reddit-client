@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext, useEffect } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { ReactComponent as RedditLogoSvg } from "./svg/reddit.svg";
 import { ReactComponent as OfflineAccountSvg } from "./svg/offline-account.svg";
 import { ReactComponent as DownArrowSvg } from "./svg/down-arrow-1.svg";
@@ -8,17 +8,14 @@ import { ReactComponent as CoinSvg } from "./svg/coin.svg";
 import { ReactComponent as CloseSvg } from "./svg/x.svg";
 import { FetchAuth, FetchRegister } from "../../util/Fetch";
 import { useHistory } from "react-router-dom";
-import { PostsContext } from "../../contexts/PostsContext";
 import { DropdownUser } from "../dropdowns/DropdownUser";
 import { DropdownSubreddit } from "../dropdowns/DropdownSubreddit";
 import { UserContext } from "../../contexts/UserContext";
-import "./Header.css";
+import "./PostSubmitHeader.css";
 
-export const Header: React.FC = () => {
-  const { posts, postsDispatch } = useContext(PostsContext);
+export const PostSubmitHeader: React.FC = () => {
   const { userDispatch } = useContext(UserContext);
   const [isShowing, setIsShowing] = useState<boolean>(false);
-  const [loadVotes, setLoadVotes] = useState<boolean>(false);
   const [user, setUser] = useState<object>({
     email: "",
     password: "",
@@ -27,27 +24,6 @@ export const Header: React.FC = () => {
   const signModalRef = useRef<HTMLDivElement>(null);
   const logModalRef = useRef<HTMLDivElement>(null);
   const history = useHistory();
-
-  useEffect(() => {
-    return () => {
-      if (!loadVotes) {
-        if (localStorage.upvoted) {
-          if (posts.length) {
-            let temp = [...posts];
-            let x = localStorage.upvoted.split(",");
-            for (let i = 0; i < posts.length; i++) {
-              if (posts[i]._id === x[i]) {
-                temp[i] = posts[i];
-                temp[i].upvoted = true;
-                postsDispatch({ type: "spread", posts: temp });
-              }
-            }
-            setLoadVotes((v: any) => !v);
-          }
-        }
-      }
-    };
-  });
 
   const openSignupModal = () => {
     signModalRef.current?.classList.add("signup-modal-fadein");

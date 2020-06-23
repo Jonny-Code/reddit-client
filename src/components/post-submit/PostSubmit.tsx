@@ -3,7 +3,7 @@ import { Link, useParams, useHistory } from "react-router-dom";
 import moment from "moment";
 import { SubredditContext } from "../../contexts/SubredditContext";
 import { Subreddit, SubredditModel } from "../../contexts/Subreddit";
-import { Header } from "../header/Header";
+import { PostSubmitHeader } from "../post-submit-header/PostSubmitHeader";
 import { DropdownSubreddit } from "../dropdowns/DropdownSubreddit";
 import { ReactComponent as PostSvg } from "./svg/post.svg";
 import { ReactComponent as ImageSvg } from "./svg/image.svg";
@@ -37,12 +37,10 @@ export const PostSubmit: React.FC = () => {
       ...form,
       [e.target.name]: e.target.value,
     });
-    console.log(form);
   };
 
   const handleClick = (e: any) => {
     let time = moment();
-    console.log(time);
     FetchPost(postsDispatch, {
       subreddit: subredditContent._id,
       votes: 0,
@@ -52,13 +50,15 @@ export const PostSubmit: React.FC = () => {
       imgSrc: "",
       body: form.body,
       comments: 0,
+      upvoted: false,
+      downvoted: false,
     });
     history.push(`/r/${subName}`);
   };
 
   return (
     <div className="post-submit">
-      <Header />
+      <PostSubmitHeader />
       <Link className="text-decoration-none" to={`/r/${subName}`}>
         <div className="post-submit-content">
           <div className="post-submit-container">

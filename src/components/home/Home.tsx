@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
+import { CreateSubreddit } from "../create-subreddit/CreateSubreddit";
 
 export const Home: React.FC = () => {
   return (
     <>
+      {/* <CreateSubreddit /> */}
       <div className="home-container">
         <div className="home-banner-1">
           <div className="home-heading-2">Shmreddit</div>

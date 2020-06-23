@@ -20,7 +20,7 @@ export const View: React.FC = () => {
             <Header />
             <PostComments />
           </Route>
-          <Route exact path="/r/:subName/">
+          <Route exact path="/r/:subName">
             <Header />
             <Banner />
             <Newsfeed />

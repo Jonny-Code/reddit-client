@@ -36,7 +36,6 @@ export const CreateComment: React.FC = () => {
 
   const handleSend = () => {
     thing2.post = postId!;
-    console.log(postId);
     FetchPostComment(commentsDispatch, thing2, thing2.post!);
   };
 

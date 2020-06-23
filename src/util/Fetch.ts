@@ -6,7 +6,6 @@ export const FetchGetPosts = async (postsDispatch: any) => {
   try {
     const res = await fetch(`${URL}/posts`);
     const r = await res.json();
-    console.log(r);
     if (r.status === "error") {
       postsDispatch({ type: "spread", posts: [] });
     } else {
@@ -25,12 +24,25 @@ export const FetchGetSubreddit = async (
   try {
     const res = await fetch(`${URL}/subreddits/` + subredditName);
     const r = await res.json();
-    console.log(r);
-    if (r.status === "error") {
-      postsDispatch({ type: "spread", subreddit: [] });
-    } else {
+    if (r.status === "success") {
       subredditDispatch({ type: "spread", subreddit: r.data.subreddit });
       postsDispatch({ type: "spread", posts: r.data.posts });
+    } else {
+      postsDispatch({ type: "spread", subreddit: [] });
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const FetchGetUser = async (userDispatch: any) => {
+  try {
+    const res = await fetch(`${URL}/users`);
+    const r = await res.json();
+    if (r.status === "error") {
+      userDispatch({ type: "spread", user: [] });
+    } else {
+      userDispatch({ type: "spread", user: r.data.user });
     }
   } catch (err) {
     console.error(err);
@@ -40,7 +52,6 @@ export const FetchGetSubreddit = async (
 export const FetchGetComments = async (commentsDispatch: any, postId: any) => {
   const res = await fetch(`${URL}/comments/` + postId);
   const r = await res.json();
-  console.log(r);
   if (r.status === "error") {
     commentsDispatch({ type: "spread", comments: [] });
   } else {
@@ -57,11 +68,45 @@ export const FetchPost = async (postsDispatch: any, data: any) => {
     body: JSON.stringify(data),
   });
   const r = await res.json();
-  console.log(r);
   if (r.success) {
     postsDispatch({ type: "add", posts: r.data });
-  } else {
-    console.error(r.error);
+  }
+};
+
+export const FetchPostUpvote = async (postsDispatch: any, post: any) => {
+  const res = await fetch(`${URL}/users/upvote`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ postId: post._id, userId: localStorage.userId }),
+  });
+  const r = await res.json();
+  if (r.status === "success") {
+    let temp = post;
+    temp.upvoted = true;
+    temp.votes += 1;
+    postsDispatch({ type: "update", posts: temp });
+    if (!localStorage.upvoted.length) {
+      localStorage.upvoted = post._id;
+    } else {
+      let x = [localStorage.upvoted, post._id];
+      localStorage.upvoted = x;
+    }
+  }
+};
+
+export const FetchPostDownvote = async (postsDispatch: any, postId: any) => {
+  const res = await fetch(`${URL}/users/downvote`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ postId, userId: localStorage.userId }),
+  });
+  const r = await res.json();
+  if (r.success) {
+    // postsDispatch({ type: "add", posts: r.data });
   }
 };
 
@@ -79,7 +124,6 @@ export const FetchPostComment = async (
   });
   const r = await res.json();
   commentsDispatch({ type: "add", comments: r.data });
-  console.log(r);
 };
 
 export const FetchPostSubreddit = async (subredditDispatch: any, data: any) => {
@@ -92,10 +136,9 @@ export const FetchPostSubreddit = async (subredditDispatch: any, data: any) => {
   });
   const r = await res.json();
   // subredditDispatch({ type: "add", subreddit: r.data });
-  console.log(r);
 };
 
-export const FetchAuth = async (data: any, history: any) => {
+export const FetchAuth = async (data: any, history: any, userDispatch: any) => {
   if (!data.email.length || !data.password.length) return;
   try {
     const res = await fetch(`${URL}/users/authenticate`, {
@@ -106,15 +149,15 @@ export const FetchAuth = async (data: any, history: any) => {
       body: JSON.stringify(data),
     });
     const r = await res.json();
-    console.log(r);
-    const { _id, name, email } = r.data.user;
+    const { _id, name, email, upvoted, downvoted } = r.data.user;
     localStorage.clear();
     localStorage.setItem("userId", _id);
     localStorage.setItem("userName", name);
     localStorage.setItem("userEmail", email);
     localStorage.setItem("userToken", r.data.token);
+    localStorage.setItem("upvoted", upvoted);
+    localStorage.setItem("downvoted", downvoted);
     history.go(0);
-    console.log(r, localStorage);
   } catch (err) {
     console.error(err);
   }
@@ -129,7 +172,6 @@ export const FetchRegister = async (data: any) => {
     body: JSON.stringify(data),
   });
   const r = await res.json();
-  console.log(r);
 };
 
 export const FetchPut = async (postsDispatch: any, data: any) => {
@@ -141,7 +183,6 @@ export const FetchPut = async (postsDispatch: any, data: any) => {
     body: JSON.stringify(data),
   });
   const r = await res.json();
-  console.log(r);
   r.success
     ? postsDispatch({ type: "update", posts: r.data })
     : console.error(r.error);
@@ -155,4 +196,18 @@ export const FetchDelete = async (postsDispatch: any, id: string) => {
   r.success
     ? postsDispatch({ type: "remove", _id: id })
     : console.error(r.error);
+};
+
+export const FetchDeleteUpvote = async (postsDispatch: any, id: string) => {
+  const res = await fetch(`${URL}/users/removeUpvote`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ postId: id, userId: localStorage.userId }),
+  });
+  const r = await res.json();
+  // r.success
+  //   ? postsDispatch({ type: "remove", _id: id })
+  //   : console.error(r.error);
 };

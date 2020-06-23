@@ -35,9 +35,6 @@ function Comment({ c }: any) {
   };
 
   const handleSend = (x: any) => {
-    console.log(form);
-    console.log(x);
-
     let c = {
       post: postId,
       points: 0,
@@ -49,11 +46,7 @@ function Comment({ c }: any) {
       hideComment: false,
       replies: [],
     };
-    console.log(c);
-
     FetchPostComment(commentsDispatch, c, postId!);
-    // setShowReply(!showReply);
-
     history.go(0);
   };
 
@@ -62,7 +55,6 @@ function Comment({ c }: any) {
       ...form,
       comment: e.target.value,
     });
-    console.log(form);
   };
 
   return (
@@ -111,7 +103,6 @@ function Comment({ c }: any) {
 
             <div
               onClick={() => {
-                console.log(c);
                 commentsDispatch({ type: "hide", c: c });
               }}
               className="vertical-line hover-vertical-line pointer"
@@ -274,7 +265,6 @@ function Comment({ c }: any) {
         >
           <div
             onClick={() => {
-              console.log(c);
               commentsDispatch({ type: "hide", c: c });
             }}
             style={{

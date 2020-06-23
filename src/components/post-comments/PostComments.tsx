@@ -50,8 +50,6 @@ export const PostComments: React.FC = () => {
   }, [postId]);
 
   const handleSend = () => {
-    console.log(form);
-
     let c = {
       post: postId,
       points: 0,
@@ -79,7 +77,6 @@ export const PostComments: React.FC = () => {
       ...form,
       comment: e.target.value,
     });
-    console.log(form);
   };
 
   return (

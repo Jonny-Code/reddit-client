@@ -1,21 +1,58 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import moment from "moment";
 import { Link, useParams } from "react-router-dom";
 import { PostsContext } from "../../contexts/PostsContext";
-import { ReactComponent as Arrow } from "./svg/arrow.svg";
 import { ReactComponent as Comment } from "./svg/comment.svg";
 import { Post } from "../../contexts/Post";
+import {
+  FetchPostUpvote,
+  FetchPostDownvote,
+  FetchDeleteUpvote,
+} from "../../util/Fetch";
 import "./Posts.css";
 
 export const Posts: React.FC = () => {
-  const { posts } = useContext(PostsContext);
-  const [upvoted, setUpvoted] = useState(false);
-  const [downvoted, setDownvoted] = useState(false);
+  const { posts, postsDispatch } = useContext(PostsContext);
+  const [localPosts, setLocalPosts] = useState<Post[]>([]);
+  const [loadVotes, setLoadVotes] = useState<boolean>(false);
   let { subName } = useParams();
+
+  useEffect(() => {
+    setLocalPosts([...posts]);
+  }, [posts]);
+
+  useEffect(() => {
+    if (!loadVotes) {
+      if (localStorage.upvoted) {
+        if (posts.length) {
+          let temp = [...posts];
+          let x = localStorage.upvoted.split(",");
+          for (let i = 0; i < posts.length; i++) {
+            if (posts[i]._id === x[i]) {
+              temp[i] = posts[i];
+              temp[i].upvoted = true;
+            }
+          }
+          postsDispatch({ type: "spread", posts: temp });
+          setLoadVotes((v: any) => true);
+        }
+      }
+    }
+  }, [posts]);
+
+  const handleUpvotedClick = (post: any) => {
+    if (post.upvoted) FetchDeleteUpvote(postsDispatch, post);
+    else FetchPostUpvote(postsDispatch, post);
+  };
+
+  const handleDownvotedClick = (id: any, downvoted: any) => {
+    if (downvoted) return;
+    FetchPostDownvote(postsDispatch, id);
+  };
 
   return (
     <>
-      {posts.map((p: Post) => (
+      {localPosts.map((p: Post) => (
         <Link
           key={p._id}
           style={{ textDecoration: "none" }}
@@ -26,6 +63,7 @@ export const Posts: React.FC = () => {
               <span
                 onClick={(e: React.MouseEvent) => {
                   e.preventDefault();
+                  handleUpvotedClick(p);
                 }}
                 className="hover-nav-btn br-2 pointer"
                 style={{
@@ -44,7 +82,7 @@ export const Posts: React.FC = () => {
                 >
                   <g id="surface1">
                     <path
-                      className={upvoted ? "upvoted" : ""}
+                      className={p.upvoted ? "upvoted" : ""}
                       id="hover-nav-svg-red"
                       fill="#818384"
                       d="M 11.320312 6.0625 L 6.714844 0.105469 C 6.664062 0.0390625 6.582031 0 6.5 0 C 6.417969 0 6.335938 0.0390625 6.285156 0.105469 L 1.679688 6.0625 C 1.617188 6.144531 1.605469 6.257812 1.652344 6.347656 C 1.699219 6.441406 1.792969 6.5 1.894531 6.5 L 4.332031 6.5 L 4.332031 12.730469 C 4.332031 12.878906 4.453125 13 4.605469 13 L 8.394531 13 C 8.546875 13 8.667969 12.878906 8.667969 12.730469 L 8.667969 6.5 L 11.105469 6.5 C 11.207031 6.5 11.300781 6.441406 11.347656 6.347656 C 11.394531 6.257812 11.382812 6.144531 11.320312 6.0625 Z M 11.320312 6.0625 "
@@ -54,9 +92,9 @@ export const Posts: React.FC = () => {
               </span>
               <span
                 className={
-                  upvoted
+                  p.upvoted
                     ? "upvoted-votes"
-                    : downvoted
+                    : p.downvoted
                     ? "downvoted-votes"
                     : "votes"
                 }
@@ -66,6 +104,7 @@ export const Posts: React.FC = () => {
               <span
                 onClick={(e: React.MouseEvent) => {
                   e.preventDefault();
+                  handleDownvotedClick(p._id, p.downvoted);
                 }}
                 className="hover-nav-btn br-2 pointer"
                 style={{
@@ -85,14 +124,13 @@ export const Posts: React.FC = () => {
                 >
                   <g id="surface1">
                     <path
-                      className={downvoted ? "downvoted" : ""}
+                      className={p.downvoted ? "downvoted" : ""}
                       id="hover-nav-svg-blue"
                       fill="#818384"
                       d="M 11.320312 6.0625 L 6.714844 0.105469 C 6.664062 0.0390625 6.582031 0 6.5 0 C 6.417969 0 6.335938 0.0390625 6.285156 0.105469 L 1.679688 6.0625 C 1.617188 6.144531 1.605469 6.257812 1.652344 6.347656 C 1.699219 6.441406 1.792969 6.5 1.894531 6.5 L 4.332031 6.5 L 4.332031 12.730469 C 4.332031 12.878906 4.453125 13 4.605469 13 L 8.394531 13 C 8.546875 13 8.667969 12.878906 8.667969 12.730469 L 8.667969 6.5 L 11.105469 6.5 C 11.207031 6.5 11.300781 6.441406 11.347656 6.347656 C 11.394531 6.257812 11.382812 6.144531 11.320312 6.0625 Z M 11.320312 6.0625 "
                     />
                   </g>
                 </svg>
-                {/* <Arrow style={{ transform: "rotate(180deg)" }} /> */}
               </span>
             </div>
             <div className="col-4-posts">
