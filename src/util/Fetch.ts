@@ -68,7 +68,7 @@ export const FetchPost = async (postsDispatch: any, data: any) => {
     body: JSON.stringify(data),
   });
   const r = await res.json();
-  if (r.success) {
+  if (r.status === "success") {
     postsDispatch({ type: "add", posts: r.data });
   }
 };
