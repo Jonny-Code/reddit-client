@@ -6,17 +6,19 @@ import { ReactComponent as SearchSvg } from "./svg/search.svg";
 import { ReactComponent as MoonSvg } from "./svg/moon.svg";
 import { ReactComponent as CoinSvg } from "./svg/coin.svg";
 import { ReactComponent as CloseSvg } from "./svg/x.svg";
-import { FetchAuth, FetchRegister } from "../../util/Fetch";
-import { useHistory } from "react-router-dom";
+import { FetchAuth, FetchRegister, FetchGetSubreddit } from "../../util/Fetch";
+import { useHistory, useParams } from "react-router-dom";
 import { PostsContext } from "../../contexts/PostsContext";
 import { DropdownUser } from "../dropdowns/DropdownUser";
 import { DropdownSubreddit } from "../dropdowns/DropdownSubreddit";
 import { UserContext } from "../../contexts/UserContext";
 import "./Header.css";
+import { SubredditContext } from "../../contexts/SubredditContext";
 
 export const Header: React.FC = () => {
   const { posts, postsDispatch } = useContext(PostsContext);
   const { userDispatch } = useContext(UserContext);
+  const { subredditDispatch } = useContext(SubredditContext);
   const [isShowing, setIsShowing] = useState<boolean>(false);
   const [loadVotes, setLoadVotes] = useState<boolean>(false);
   const [user, setUser] = useState<object>({
@@ -26,7 +28,12 @@ export const Header: React.FC = () => {
   });
   const signModalRef = useRef<HTMLDivElement>(null);
   const logModalRef = useRef<HTMLDivElement>(null);
+  let { subName } = useParams();
   const history = useHistory();
+
+  useEffect(() => {
+    FetchGetSubreddit(subredditDispatch, postsDispatch, subName);
+  }, []);
 
   useEffect(() => {
     return () => {

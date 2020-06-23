@@ -3,7 +3,7 @@ import { Link, useParams, useHistory } from "react-router-dom";
 import moment from "moment";
 import { SubredditContext } from "../../contexts/SubredditContext";
 import { Subreddit, SubredditModel } from "../../contexts/Subreddit";
-import { PostSubmitHeader } from "../post-submit-header/PostSubmitHeader";
+import { Header } from "../header/Header";
 import { DropdownSubreddit } from "../dropdowns/DropdownSubreddit";
 import { ReactComponent as PostSvg } from "./svg/post.svg";
 import { ReactComponent as ImageSvg } from "./svg/image.svg";
@@ -58,7 +58,7 @@ export const PostSubmit: React.FC = () => {
 
   return (
     <div className="post-submit">
-      <PostSubmitHeader />
+      <Header />
       <Link className="text-decoration-none" to={`/r/${subName}`}>
         <div className="post-submit-content">
           <div className="post-submit-container">

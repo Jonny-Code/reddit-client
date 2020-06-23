@@ -1,22 +1,11 @@
 import React, { useEffect, useContext, useState } from "react";
 import { SubredditContext } from "../../contexts/SubredditContext";
 import { SubredditModel, Subreddit } from "../../contexts/Subreddit";
-import { useParams } from "react-router-dom";
-import { FetchGetSubreddit } from "../../util/Fetch";
-import { PostsContext } from "../../contexts/PostsContext";
 import "./Banner.css";
 
 export const Banner: React.FC = () => {
   const { subreddit } = useContext(SubredditContext);
-  const { subredditDispatch } = useContext(SubredditContext);
-  const { postsDispatch } = useContext(PostsContext);
   const [sub, setSub] = useState<Subreddit>(SubredditModel);
-
-  let { subName } = useParams();
-
-  useEffect(() => {
-    FetchGetSubreddit(subredditDispatch, postsDispatch, subName);
-  }, []);
 
   useEffect(() => {
     setSub(subreddit);
