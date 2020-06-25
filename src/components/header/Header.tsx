@@ -1,35 +1,28 @@
-import React, { useState, useRef, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { ReactComponent as RedditLogoSvg } from "./svg/reddit.svg";
 import { ReactComponent as OfflineAccountSvg } from "./svg/offline-account.svg";
 import { ReactComponent as DownArrowSvg } from "./svg/down-arrow-1.svg";
 import { ReactComponent as SearchSvg } from "./svg/search.svg";
 import { ReactComponent as MoonSvg } from "./svg/moon.svg";
 import { ReactComponent as CoinSvg } from "./svg/coin.svg";
-import { ReactComponent as CloseSvg } from "./svg/x.svg";
-import { FetchAuth, FetchRegister, FetchGetSubreddit } from "../../util/Fetch";
-import { useHistory, useParams } from "react-router-dom";
+import { FetchGetSubreddit } from "../../util/Fetch";
+import { useParams } from "react-router-dom";
 import { PostsContext } from "../../contexts/PostsContext";
 import { DropdownUser } from "../dropdowns/DropdownUser";
 import { DropdownSubreddit } from "../dropdowns/DropdownSubreddit";
-import { UserContext } from "../../contexts/UserContext";
-import "./Header.css";
+import { LogInModal } from "../modals/LogInModal";
 import { SubredditContext } from "../../contexts/SubredditContext";
+import { SignUpModal } from "../modals/SignUpModal";
+import "./Header.css";
 
 export const Header: React.FC = () => {
   const { posts, postsDispatch } = useContext(PostsContext);
-  const { userDispatch } = useContext(UserContext);
   const { subredditDispatch } = useContext(SubredditContext);
   const [isShowing, setIsShowing] = useState<boolean>(false);
   const [loadVotes, setLoadVotes] = useState<boolean>(false);
-  const [user, setUser] = useState<object>({
-    email: "",
-    password: "",
-    name: "",
-  });
-  const signModalRef = useRef<HTMLDivElement>(null);
-  const logModalRef = useRef<HTMLDivElement>(null);
+  const [openLogInModal, setOpenLogInModal] = useState("");
+  const [openSignUpModal, setOpenSignUpModal] = useState("");
   let { subName } = useParams();
-  const history = useHistory();
 
   useEffect(() => {
     FetchGetSubreddit(subredditDispatch, postsDispatch, subName);
@@ -56,43 +49,12 @@ export const Header: React.FC = () => {
     };
   });
 
-  const openSignupModal = () => {
-    signModalRef.current?.classList.add("signup-modal-fadein");
-    signModalRef.current?.classList.add("signup-modal-show");
+  const handleOpenSignupModal = () => {
+    setOpenSignUpModal("signup-modal-fadein signup-modal-show");
   };
-  const closeSignupModal = () => {
-    signModalRef.current?.classList.remove("signup-modal-fadein");
-    signModalRef.current?.classList.add("signup-modal-fadeout");
-    setTimeout(() => {
-      signModalRef.current?.classList.remove("signup-modal-show");
-      signModalRef.current?.classList.remove("signup-modal-fadeout");
-    }, 400);
-  };
-  const openLoginModal = () => {
-    logModalRef.current?.classList.add("login-modal-fadein");
-    logModalRef.current?.classList.add("login-modal-show");
-  };
-  const closeLoginModal = () => {
-    logModalRef.current?.classList.remove("login-modal-fadein");
-    logModalRef.current?.classList.add("login-modal-fadeout");
-    setTimeout(() => {
-      logModalRef.current?.classList.remove("login-modal-show");
-      logModalRef.current?.classList.remove("login-modal-fadeout");
-    }, 400);
-  };
-  const updateField = (
-    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value,
-    });
-  };
-  const login = () => {
-    FetchAuth(user, history, userDispatch);
-  };
-  const signUp = () => {
-    FetchRegister(user);
+
+  const handleOpenLoginModal = () => {
+    setOpenLogInModal("login-modal-fadein login-modal-show");
   };
 
   return (
@@ -116,111 +78,27 @@ export const Header: React.FC = () => {
         ) : (
           <div className="col-3-header ml-5">
             <button
-              onClick={openLoginModal}
+              onClick={handleOpenLoginModal}
               className="btn-dark pointer focus-outline-none"
             >
               LOG IN
             </button>
-            <div ref={logModalRef} className="login-modal">
-              <div className="login-modal-content">
-                <div className="login-modal-col-1"></div>
-                <div className="login-modal-col-2">
-                  <span onClick={closeLoginModal} className="login-modal-close">
-                    <CloseSvg />
-                  </span>
-                  <div className="login-modal-container">
-                    <RedditLogoSvg />
-                    <h4>Sign in</h4>
-                    <input
-                      onChange={updateField}
-                      name="email"
-                      type="email"
-                      placeholder="Email"
-                    />
-                    <input
-                      onChange={updateField}
-                      name="password"
-                      type="password"
-                      placeholder="Password"
-                    />
-                    <button onClick={login} className="pointer">
-                      SIGN IN
-                    </button>
-                    <small>
-                      <span className="d-inline text-blue pointer">
-                        Forgot username
-                      </span>{" "}
-                      <div className="d-inline text-dark">·</div>{" "}
-                      <span className="d-inline text-blue pointer">
-                        Forgot password
-                      </span>
-                    </small>
-                    <small>
-                      New to Reddit?{" "}
-                      <span className="text-blue pointer">SIGN UP</span>
-                    </small>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <LogInModal
+              openLogInModal={openLogInModal}
+              setOpenLogInModal={setOpenLogInModal}
+            />
+
             <button
-              onClick={openSignupModal}
+              onClick={handleOpenSignupModal}
               className="btn-light pointer focus-outline-none"
             >
               SIGN UP
             </button>
-            <div ref={signModalRef} className="signup-modal">
-              <div className="signup-modal-content">
-                <div className="signup-modal-col-1"></div>
-                <div className="signup-modal-col-2">
-                  <span
-                    onClick={closeSignupModal}
-                    className="signup-modal-close"
-                  >
-                    <CloseSvg />
-                  </span>
-                  <div className="signup-modal-container">
-                    <h4>
-                      By having a Reddit account, you can join, vote, and
-                      comment on all your favorite Reddit content.
-                    </h4>
-                    <input
-                      onChange={updateField}
-                      name="name"
-                      type="text"
-                      placeholder="Username"
-                    />
-                    <input
-                      onChange={updateField}
-                      name="email"
-                      type="email"
-                      placeholder="Email"
-                    />
-                    <input
-                      onChange={updateField}
-                      name="password"
-                      type="password"
-                      placeholder="Password"
-                    />
-                    <button onClick={signUp} className="pointer">
-                      SIGN UP
-                    </button>
-                    <small>
-                      Already a Redditor?{" "}
-                      <span className="text-blue pointer">LOG IN</span>
-                    </small>
-                    <small>
-                      By clicking next, you agree to our{" "}
-                      <span className="text-blue pointer">Terms</span> and that
-                      you have read our{" "}
-                      <span className="text-blue pointer">Privacy Policy</span>{" "}
-                      and{" "}
-                      <span className="text-blue pointer">Content Policy</span>.
-                    </small>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <SignUpModal
+              openSignUpModal={openSignUpModal}
+              setOpenSignUpModal={setOpenSignUpModal}
+            />
+
             <div
               onClick={() => setIsShowing(!isShowing)}
               className="dropdown pointer"

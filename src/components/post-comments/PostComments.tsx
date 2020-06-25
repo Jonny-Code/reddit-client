@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import moment from "moment";
 import { ReactComponent as ArrowSvg } from "./svg/arrow.svg";
 import { ReactComponent as CommentSvg } from "./svg/comment.svg";
@@ -24,6 +24,7 @@ export const PostComments: React.FC = () => {
   const [form, setForm] = useState({ comment: "" });
   const [isShowing, setIsShowing] = useState(false);
   let { subName, postId } = useParams();
+  let history = useHistory();
 
   useEffect(() => {
     if (!Array.isArray(subreddit)) {
@@ -84,13 +85,13 @@ export const PostComments: React.FC = () => {
       <div className="post-comments">
         <Link className="text-decoration-none" to={`/r/${subName}`}>
           <div className="post-comments-content">
-            <div className="post-comments-container">
-              <div
-                onClick={(e: any) => {
-                  e.preventDefault();
-                }}
-                className="post-comments-header"
-              >
+            <div
+              onClick={(e: any) => {
+                e.preventDefault();
+              }}
+              className="post-comments-container"
+            >
+              <div className="post-comments-header">
                 <div className="d-flex w-100">
                   <div className="post-comments-header-vote-col">
                     <span className="post-comments-arrow-up hover-nav-btn">
@@ -125,10 +126,15 @@ export const PostComments: React.FC = () => {
                     >
                       {postContent.title}
                     </h4>
+
                     <h4
+                      onClick={() => {
+                        history.goBack();
+                      }}
                       style={{
                         margin: "0 30px 0 auto",
                         fontFamily: "monospace",
+                        cursor: "pointer",
                       }}
                       className="text-light fs-15 font-weight-light"
                     >

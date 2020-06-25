@@ -8,13 +8,16 @@ import {
   FetchPostUpvote,
   FetchPostDownvote,
   FetchDeleteUpvote,
+  FetchDeleteDownvote,
 } from "../../util/Fetch";
 import "./Posts.css";
+import { LogInModal } from "../modals/LogInModal";
 
 export const Posts: React.FC = () => {
   const { posts, postsDispatch } = useContext(PostsContext);
   const [localPosts, setLocalPosts] = useState<Post[]>([]);
   const [loadVotes, setLoadVotes] = useState<boolean>(false);
+  const [openLogInModal, setOpenLogInModal] = useState("");
   let { subName } = useParams();
 
   useEffect(() => {
@@ -40,18 +43,34 @@ export const Posts: React.FC = () => {
     }
   }, [posts]);
 
+  const handleOpenLoginModal = () => {
+    setOpenLogInModal("login-modal-fadein login-modal-show");
+  };
+
   const handleUpvotedClick = (post: any) => {
+    if (!localStorage.userToken) {
+      handleOpenLoginModal();
+      return;
+    }
     if (post.upvoted) FetchDeleteUpvote(postsDispatch, post);
     else FetchPostUpvote(postsDispatch, post);
   };
 
-  const handleDownvotedClick = (id: any, downvoted: any) => {
-    if (downvoted) return;
-    FetchPostDownvote(postsDispatch, id);
+  const handleDownvotedClick = (post: any) => {
+    if (!localStorage.userToken) {
+      handleOpenLoginModal();
+      return;
+    }
+    if (post.downvoted) FetchDeleteDownvote(postsDispatch, post);
+    else FetchPostDownvote(postsDispatch, post);
   };
 
   return (
     <>
+      <LogInModal
+        openLogInModal={openLogInModal}
+        setOpenLogInModal={setOpenLogInModal}
+      />
       {localPosts.map((p: Post) => (
         <Link
           key={p._id}
@@ -104,7 +123,7 @@ export const Posts: React.FC = () => {
               <span
                 onClick={(e: React.MouseEvent) => {
                   e.preventDefault();
-                  handleDownvotedClick(p._id, p.downvoted);
+                  handleDownvotedClick(p);
                 }}
                 className="hover-nav-btn br-2 pointer"
                 style={{
