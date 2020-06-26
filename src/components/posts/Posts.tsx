@@ -31,13 +31,15 @@ export const Posts: React.FC = () => {
           let temp = [...posts];
           let x = localStorage.upvoted.split(",");
           for (let i = 0; i < posts.length; i++) {
-            if (posts[i]._id === x[i]) {
-              temp[i] = posts[i];
-              temp[i].upvoted = true;
+            for (let j = 0; j < x.length; j++) {
+              if (posts[i]._id === x[j]) {
+                temp[i] = posts[i];
+                temp[i].upvoted = true;
+              }
             }
           }
           postsDispatch({ type: "spread", posts: temp });
-          setLoadVotes((v: any) => true);
+          setLoadVotes((v: any) => (v = !v));
         }
       }
     }

@@ -42,7 +42,7 @@ export const Header: React.FC = () => {
                 postsDispatch({ type: "spread", posts: temp });
               }
             }
-            setLoadVotes((v: any) => !v);
+            setLoadVotes((v: any) => (v = !v));
           }
         }
       }

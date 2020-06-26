@@ -198,18 +198,24 @@ export const FetchDelete = async (postsDispatch: any, id: string) => {
     : console.error(r.error);
 };
 
-export const FetchDeleteUpvote = async (postsDispatch: any, id: string) => {
+export const FetchDeleteUpvote = async (postsDispatch: any, post: any) => {
   const res = await fetch(`${URL}/users/removeUpvote`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ postId: id, userId: localStorage.userId }),
+    body: JSON.stringify({ postId: post._id, userId: localStorage.userId }),
   });
   const r = await res.json();
-  // r.status === "success"
-  //   ? postsDispatch({ type: "remove", _id: id })
-  //   : console.error(r.error);
+  console.log(r);
+  if (r.status === "success") {
+    postsDispatch({ type: "update", posts: r.data });
+    localStorage.upvoted = localStorage.upvoted
+      .split(",")
+      .filter((i: any) => i !== post._id);
+  } else {
+    console.error(r.error);
+  }
 };
 
 export const FetchDeleteDownvote = async (postsDispatch: any, id: string) => {
