@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import { Banner } from "../banner/Banner";
 import { Header } from "../header/Header";
 import { Newsfeed } from "../newsfeed/Newsfeed";
