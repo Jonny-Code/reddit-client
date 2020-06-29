@@ -1,10 +1,13 @@
 .dropdown-subreddit {
   border: 1px solid #2f2f31;
+  background: #1a1a1b;
   border-radius: 3px;
   display: flex;
   align-items: center;
   margin: 0;
   padding: 0 0 0 4px;
+  width: 270px;
+  height: 36px;
 }
 .dropdown-subreddit:hover {
   border: 1px solid #4d4e50;

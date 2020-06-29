@@ -36,12 +36,14 @@ export const Header: React.FC = () => {
             let temp = [...posts];
             let x = localStorage.upvoted.split(",");
             for (let i = 0; i < posts.length; i++) {
-              if (posts[i]._id === x[i]) {
-                temp[i] = posts[i];
-                temp[i].upvoted = true;
-                postsDispatch({ type: "spread", posts: temp });
+              for (let j = 0; j < x.length; j++) {
+                if (posts[i]._id === x[j]) {
+                  temp[i] = posts[i];
+                  temp[i].upvoted = true;
+                }
               }
             }
+            postsDispatch({ type: "spread", posts: temp });
             setLoadVotes((v: any) => (v = !v));
           }
         }
@@ -63,9 +65,7 @@ export const Header: React.FC = () => {
         <div className="col-7-header">
           <RedditLogoSvg />
           <p className="brand-text">reddit</p>
-          {localStorage.userToken ? (
-            <DropdownSubreddit color="#1a1a1b" size={{ x: 270, y: 36 }} />
-          ) : null}
+          {localStorage.userToken ? <DropdownSubreddit /> : null}
           <div className="search-container">
             <form action="search">
               <SearchSvg className="search-svg" />

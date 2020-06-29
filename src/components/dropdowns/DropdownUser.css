@@ -5,7 +5,7 @@
   justify-content: flex-end;
 }
 .dropdown-user {
-  border: 1px solid #1a1a1b;
+  border: 1px solid #2f2f31;
   border-radius: 3px;
   display: flex;
   align-items: center;
@@ -55,5 +55,19 @@
     height: 36px;
     max-width: 220px;
     width: 100%;
+  }
+}
+@media only screen and (max-width: 610px) {
+  .dropdown-user {
+    max-width: 120px;
+  }
+  .dropdown-user-karma {
+    display: none;
+  }
+  .dropdown-user-name {
+    display: none;
+  }
+  #dropdown-user-karma-svg {
+    display: none;
   }
 }

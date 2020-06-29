@@ -1,0 +1,71 @@
+.navbar-hot {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 2px 10px;
+  background-color: rgb(26, 26, 27);
+  border: 1px solid rgb(26, 26, 27);
+  border-radius: 18px;
+  font-size: 14px;
+}
+.navbar-new {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 2px 10px;
+  background-color: rgb(26, 26, 27);
+  border: 1px solid rgb(26, 26, 27);
+  border-radius: 18px;
+  font-size: 14px;
+}
+.navbar-top {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 2px 10px;
+  background-color: rgb(26, 26, 27);
+  border: 1px solid rgb(26, 26, 27);
+  border-radius: 18px;
+  font-size: 14px;
+}
+.navbar-more {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 2px 10px;
+  background-color: rgb(26, 26, 27);
+  border: 1px solid rgb(26, 26, 27);
+  border-radius: 18px;
+  font-size: 14px;
+}
+.navbar-card {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 2px 10px;
+  background-color: rgb(26, 26, 27);
+  border: 1px solid rgb(26, 26, 27);
+  border-radius: 18px;
+}
+
+@media only screen and (max-width: 380px) {
+  .navbar-hot {
+    padding: 2px 5px;
+    font-size: 13px;
+  }
+  .navbar-new {
+    padding: 2px 5px;
+    font-size: 13px;
+  }
+  .navbar-top {
+    padding: 2px 5px;
+    font-size: 13px;
+  }
+  .navbar-more {
+    padding: 2px 5px;
+    font-size: 13px;
+  }
+  .navbar-card {
+    padding: 2px 5px;
+  }
+}

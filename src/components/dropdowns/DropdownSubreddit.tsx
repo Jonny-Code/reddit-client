@@ -3,21 +3,11 @@ import { SubredditContext } from "../../contexts/SubredditContext";
 import { ReactComponent as DownArrow } from "./svg/down-arrow-1.svg";
 import "./DropdownSubreddit.css";
 
-export const DropdownSubreddit: React.FC<{
-  color: string;
-  size: { x: number; y: number };
-}> = (props) => {
+export const DropdownSubreddit: React.FC = () => {
   const { subreddit } = useContext(SubredditContext);
 
   return (
-    <div
-      style={{
-        background: props.color,
-        height: `${props.size.y}px`,
-        width: `${props.size.x}px`,
-      }}
-      className="dropdown-subreddit pointer"
-    >
+    <div className="dropdown-subreddit pointer">
       <img
         style={{
           maxHeight: "24px",

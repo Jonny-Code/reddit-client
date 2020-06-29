@@ -74,9 +74,31 @@
 .hover-submit-btn:hover {
   background: rgb(35, 35, 37);
 }
+.post-submit-btn-dark {
+  padding: 7px 2px;
+  margin-right: 8px;
+  width: 120px;
+  height: 31px;
+  border-radius: 3px;
+  font-family: monospace;
+  font-weight: bolder;
+  background-color: #1a1a1b;
+  color: #d7dadc;
+  border: 1px solid #d7dadc;
+}
+.post-submit-btn-light {
+  padding: 7px 2px;
+  margin-left: 8px;
+  width: 120px;
+  height: 31px;
+  border-radius: 3px;
+  font-family: monospace;
+  font-weight: bolder;
+  border: 1px solid #d7dadc;
+}
 
 @media only screen and (max-width: 960px) {
-  .post-submit-about {
+  .col-2-post-submit {
     display: none;
   }
 }

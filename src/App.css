@@ -10,6 +10,9 @@
 .d-flex {
   display: flex;
 }
+.highlight-none {
+  -webkit-tap-highlight-color: transparent;
+}
 .justify-content-center {
   justify-content: center;
 }
@@ -59,6 +62,11 @@
 /* Text-Decoration */
 .text-decoration-none {
   text-decoration: none;
+  color: transparent;
+  outline: none;
+}
+.text-decoration-none:visited {
+  outline: none;
 }
 
 /* Hover */
@@ -87,6 +95,10 @@
 
 /* Focus */
 .focus-outline-none:focus {
+  outline: none;
+}
+/* Active */
+.active-outline-none:active {
   outline: none;
 }
 

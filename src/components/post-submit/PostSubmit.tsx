@@ -59,7 +59,10 @@ export const PostSubmit: React.FC = () => {
   return (
     <div className="post-submit">
       <Header />
-      <Link className="text-decoration-none" to={`/r/${subName}`}>
+      <Link
+        className="highlight-none text-decoration-none"
+        to={`/r/${subName}`}
+      >
         <div className="post-submit-content">
           <div className="post-submit-container">
             <div
@@ -134,7 +137,7 @@ export const PostSubmit: React.FC = () => {
                       </span>
                     </h4>
                   </div>
-                  <DropdownSubreddit color="#1a1a1b" size={{ x: 292, y: 40 }} />
+                  <DropdownSubreddit />
                   <div
                     style={{
                       width: "100%",
@@ -287,7 +290,6 @@ export const PostSubmit: React.FC = () => {
                           display: "flex",
                           flexDirection: "column",
                           margin: "0 12px",
-
                           width: "100%",
                         }}
                       >
@@ -318,7 +320,7 @@ export const PostSubmit: React.FC = () => {
                             style={{
                               background: "#1a1a1b",
                               color: "#d7dadc",
-                              padding: "10px 0 10px 10px",
+                              padding: "10px",
                               fontSize: "14px",
                               width: "100%",
                             }}
@@ -443,7 +445,7 @@ export const PostSubmit: React.FC = () => {
                               marginRight: "2px",
                               height: "31px",
                             }}
-                            className="btn-dark pointer focus-outline-none"
+                            className="post-submit-btn-dark pointer focus-outline-none"
                           >
                             SAVE DRAFT
                           </button>
@@ -454,7 +456,7 @@ export const PostSubmit: React.FC = () => {
                               width: "80px",
                               height: "31px",
                             }}
-                            className="btn-light pointer focus-outline-none"
+                            className="post-submit-btn-light pointer focus-outline-none"
                           >
                             POST
                           </button>

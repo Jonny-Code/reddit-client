@@ -83,7 +83,10 @@ export const PostComments: React.FC = () => {
   return (
     <>
       <div className="post-comments">
-        <Link className="text-decoration-none" to={`/r/${subName}`}>
+        <Link
+          className="highlight-none text-decoration-none"
+          to={`/r/${subName}`}
+        >
           <div className="post-comments-content">
             <div
               onClick={(e: any) => {
@@ -217,6 +220,7 @@ export const PostComments: React.FC = () => {
                       style={{
                         flex: 24,
                         margin: "0 6px",
+                        padding: "0 8px 0 0",
                       }}
                     >
                       <div

@@ -1,8 +1,3 @@
-body {
-  padding: 0;
-  margin: 0;
-}
-
 header h2 {
   margin: 10px 0;
 }
@@ -10,14 +5,6 @@ header h2 {
 .main-background-banner {
   background-color: #1a1a1b;
   padding-top: 48px;
-  /* margin: 48px 0 0 0; */
-}
-
-.banner-banner {
-  /* background: #d5653e
-    url(https://styles.redditmedia.com/t5_2qh62/styles/bannerBackgroundImage_6jdz5i1fbdi01.png)
-    no-repeat center / cover; */
-  /* height: 144px; */
 }
 
 .row-banner {
@@ -94,4 +81,28 @@ header h2 {
   background-color: #d7dadc;
   border-radius: 3px;
   border: 1px solid #d7dadc;
+}
+
+@media only screen and (max-width: 480px) {
+  .logo-placeholder-banner {
+    height: 54px;
+    width: 54px;
+  }
+  .title-banner {
+    font-size: 19px;
+    padding: 0 8px 4px 0;
+  }
+  .subreddit-banner {
+    font-size: 13px;
+  }
+  .text-container-banner {
+    padding: 0;
+  }
+  .btn-light-banner {
+    padding: 2px 7px 2px;
+    width: 84%;
+  }
+  .mt-x-banner {
+    margin: 18px 0 0 0;
+  }
 }
