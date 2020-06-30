@@ -46,6 +46,21 @@ export const Header: React.FC = () => {
             postsDispatch({ type: "spread", posts: temp });
             setLoadVotes((v: any) => (v = !v));
           }
+        } else if (localStorage.downvoted) {
+          if (posts.length) {
+            let temp = [...posts];
+            let x = localStorage.downvoted.split(",");
+            for (let i = 0; i < posts.length; i++) {
+              for (let j = 0; j < x.length; j++) {
+                if (posts[i]._id === x[j]) {
+                  temp[i] = posts[i];
+                  temp[i].downvoted = true;
+                }
+              }
+            }
+            postsDispatch({ type: "spread", posts: temp });
+            setLoadVotes((v: any) => (v = !v));
+          }
         }
       }
     };

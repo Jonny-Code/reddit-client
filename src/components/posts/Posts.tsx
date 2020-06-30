@@ -10,22 +10,27 @@ import {
   FetchDeleteUpvote,
   FetchDeleteDownvote,
 } from "../../util/Fetch";
-import "./Posts.css";
 import { LogInModal } from "../modals/LogInModal";
+import "./Posts.css";
 
-export const Posts: React.FC = () => {
+export const Posts: React.FC<{ order: string | null }> = (props) => {
   const { posts, postsDispatch } = useContext(PostsContext);
   const [localPosts, setLocalPosts] = useState<Post[]>([]);
-  const [loadVotes, setLoadVotes] = useState<boolean>(false);
+  const [loadUpVotes, setLoadUpVotes] = useState<boolean>(false);
+  const [loadDownVotes, setLoadDownVotes] = useState<boolean>(false);
   const [openLogInModal, setOpenLogInModal] = useState("");
   let { subName } = useParams();
 
   useEffect(() => {
-    setLocalPosts([...posts]);
+    if (props.order === "top") {
+      let temp = [...posts];
+      temp.sort((a, b) => b.votes - a.votes);
+      setLocalPosts([...temp]);
+    } else if (props.order === null) setLocalPosts([...posts]);
   }, [posts]);
 
   useEffect(() => {
-    if (!loadVotes) {
+    if (!loadUpVotes) {
       if (localStorage.upvoted) {
         if (posts.length) {
           let temp = [...posts];
@@ -39,7 +44,25 @@ export const Posts: React.FC = () => {
             }
           }
           postsDispatch({ type: "spread", posts: temp });
-          setLoadVotes((v: any) => (v = !v));
+          setLoadUpVotes((v: any) => (v = true));
+        }
+      }
+    }
+    if (!loadDownVotes) {
+      if (localStorage.downvoted) {
+        if (posts.length) {
+          let temp = [...posts];
+          let x = localStorage.downvoted.split(",");
+          for (let i = 0; i < posts.length; i++) {
+            for (let j = 0; j < x.length; j++) {
+              if (posts[i]._id === x[j]) {
+                temp[i] = posts[i];
+                temp[i].downvoted = true;
+              }
+            }
+          }
+          postsDispatch({ type: "spread", posts: temp });
+          setLoadDownVotes((v: any) => (v = true));
         }
       }
     }

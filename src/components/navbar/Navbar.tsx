@@ -5,8 +5,11 @@ import { ReactComponent as Top } from "./svg/top.svg";
 import { ReactComponent as Card } from "./svg/card.svg";
 import { ReactComponent as DownArrow } from "./svg/down-arrow-1.svg";
 import "./Navbar.css";
+import { Link, useParams } from "react-router-dom";
 
 export const Navbar: React.FC = () => {
+  let { subName } = useParams();
+
   return (
     <div className="d-flex nav-container-news">
       <div className="d-flex align-items-center w-100">
@@ -18,10 +21,15 @@ export const Navbar: React.FC = () => {
           <New />
           <span className="text-light pl-1 font-weight-bold">New</span>
         </button>
-        <button className="navbar-top focus-outline-none hover-nav-btn">
-          <Top />
-          <span className="text-light pl-1 font-weight-bold">Top</span>
-        </button>
+        <Link
+          className="highlight-none text-decoration-none"
+          to={`/r/${subName}/top`}
+        >
+          <button className="navbar-top focus-outline-none hover-nav-btn">
+            <Top />
+            <span className="text-light pl-1 font-weight-bold">Top</span>
+          </button>
+        </Link>
         <button className="navbar-more focus-outline-none hover-nav-btn">
           <span
             style={{ height: "21px" }}

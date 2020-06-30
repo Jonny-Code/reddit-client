@@ -1,6 +1,5 @@
 import React from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
-import { Banner } from "../banner/Banner";
 import { Header } from "../header/Header";
 import { Newsfeed } from "../newsfeed/Newsfeed";
 import { PostSubmit } from "../post-submit/PostSubmit";
@@ -21,9 +20,10 @@ export const View: React.FC = () => {
             <PostComments />
           </Route>
           <Route exact path="/r/:subName">
-            <Header />
-            <Banner />
-            <Newsfeed />
+            <Newsfeed order={null} />
+          </Route>
+          <Route exact path="/r/:subName/top">
+            <Newsfeed order="top" />
           </Route>
           <Route path="/r/:subName/submit" component={PostSubmit} />
 

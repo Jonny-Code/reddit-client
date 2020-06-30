@@ -106,7 +106,16 @@ export const FetchPostDownvote = async (postsDispatch: any, post: any) => {
   });
   const r = await res.json();
   if (r.status === "success") {
-    // postsDispatch({ type: "add", posts: r.data });
+    let temp = post;
+    temp.downvoted = true;
+    temp.votes -= 1;
+    postsDispatch({ type: "update", posts: temp });
+    if (!localStorage.downvoted.length) {
+      localStorage.downvoted = post._id;
+    } else {
+      let x = [localStorage.downvoted, post._id];
+      localStorage.downvoted = x;
+    }
   }
 };
 
@@ -218,16 +227,21 @@ export const FetchDeleteUpvote = async (postsDispatch: any, post: any) => {
   }
 };
 
-export const FetchDeleteDownvote = async (postsDispatch: any, id: string) => {
+export const FetchDeleteDownvote = async (postsDispatch: any, post: any) => {
   const res = await fetch(`${URL}/users/removeDownvote`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ postId: id, userId: localStorage.userId }),
+    body: JSON.stringify({ postId: post._id, userId: localStorage.userId }),
   });
   const r = await res.json();
-  // r.status === "success"
-  //   ? postsDispatch({ type: "remove", _id: id })
-  //   : console.error(r.error);
+  if (r.status === "success") {
+    postsDispatch({ type: "update", posts: r.data });
+    localStorage.downvoted = localStorage.downvoted
+      .split(",")
+      .filter((i: any) => i !== post._id);
+  } else {
+    console.error(r.error);
+  }
 };
